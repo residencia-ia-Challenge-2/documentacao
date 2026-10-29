@@ -1,0 +1,28 @@
+site_name: Controle nutricional com IA — Grupo 13
+site_description: Requisitos, arquitetura planejada e avaliação do projeto de controle nutricional com IA.
+site_author: Grupo 13
+theme:
+  name: material
+  language: pt-BR
+  palette:
+    primary: teal
+    accent: green
+  features:
+    - navigation.footer
+    - content.code.copy
+plugins:
+  - search:
+      lang: pt
+markdown_extensions:
+  - admonition
+  - tables
+  - toc:
+      permalink: true
+nav:
+  - Início: index.md
+  - Projeto e público: projeto.md
+  - Requisitos: requisitos.md
+  - Arquitetura: arquitetura.md
+  - Riscos e premissas: riscos.md
+  - Metas e indicadores: metricas.md
+  - Referências: fontes.md
