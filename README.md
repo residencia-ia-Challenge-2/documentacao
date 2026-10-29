@@ -6,6 +6,14 @@ O conteúdo apresenta a ideia, o escopo, o público, os requisitos, a arquitetur
 
 O projeto utiliza **YOLOv8 para visão computacional** e **`qwen3:8b` como único modelo de linguagem**, com testes locais do LLM.
 
+## GitHub Pages
+
+Endereço da documentação: <https://residencia-ia-challenge-2.github.io/documentacao/>.
+
+O workflow `.github/workflows/pages.yml` gera e valida o site e publica no GitHub Pages a cada push em `main`. Também pode ser executado manualmente em **Actions → Publicar documentação → Run workflow**.
+
+Para habilitar a hospedagem no repositório, selecione **Settings → Pages → Build and deployment → Source → GitHub Actions**. Acompanhe a execução em **Actions**; o endereço fica disponível após a publicação bem-sucedida.
+
 ## Estrutura
 
 ```text
