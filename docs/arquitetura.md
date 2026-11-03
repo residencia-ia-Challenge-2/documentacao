@@ -1,6 +1,6 @@
 # Arquitetura e funcionamento
 
-A arquitetura proposta organiza a aplicação em cliente, gateway e orquestração, processamento de imagens e produtos, inteligência e MLOps.
+A arquitetura proposta do **FoodScan** organiza a aplicação em cliente, gateway e orquestração, processamento de imagens e produtos, inteligência e MLOps.
 
 ## Componentes
 

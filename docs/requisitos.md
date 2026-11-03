@@ -1,6 +1,6 @@
 # Requisitos
 
-Os requisitos definem as funcionalidades e as metas de qualidade do sistema.
+Os requisitos definem as funcionalidades e as metas de qualidade do **FoodScan**.
 
 ## Requisitos funcionais
 

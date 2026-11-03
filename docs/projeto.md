@@ -2,7 +2,7 @@
 
 ## Cenário e problema
 
-O projeto está inserido em saúde, nutrição e bem-estar digital. A proposta é automatizar o diário alimentar, substituindo a busca e a digitação manual por registros fotográficos e escaneamento de produtos.
+O **FoodScan** está inserido em saúde, nutrição e bem-estar digital. A proposta é automatizar o diário alimentar, substituindo a busca e a digitação manual por registros fotográficos e escaneamento de produtos.
 
 O documento da equipe identifica como problema o abandono de aplicativos tradicionais de controle calórico e nutricional. Os fatores apontados são o esforço de digitação, a imprecisão na estimativa visual de porções e a falta de tempo no cotidiano.
 

@@ -1,8 +1,8 @@
-# Controle nutricional com inteligência artificial
+# FoodScan
 
 **Grupo 13 · Saúde, nutrição e bem-estar digital**
 
-O projeto propõe simplificar o diário alimentar por meio de fotografias de refeições e leitura de códigos de barras de produtos industrializados. O objetivo é reduzir o esforço de registro e apoiar o acompanhamento nutricional diário.
+O **FoodScan** propõe simplificar o diário alimentar por meio de fotografias de refeições e leitura de códigos de barras de produtos industrializados. O objetivo é reduzir o esforço de registro e apoiar o acompanhamento nutricional diário.
 
 ## Questão central
 

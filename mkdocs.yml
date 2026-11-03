@@ -1,6 +1,6 @@
-site_name: Controle nutricional com IA — Grupo 13
+site_name: FoodScan — Grupo 13
 site_url: https://residencia-ia-challenge-2.github.io/documentacao/
-site_description: Requisitos, arquitetura planejada e avaliação do projeto de controle nutricional com IA.
+site_description: Requisitos, arquitetura planejada e avaliação do FoodScan, diário alimentar por fotografia e código de barras.
 site_author: Grupo 13
 theme:
   name: material

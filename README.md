@@ -1,6 +1,6 @@
-# Documentação inicial — Grupo 13
+# FoodScan — Documentação · Grupo 13
 
-Documentação do projeto de controle nutricional com IA, construída com **MkDocs + Material** a partir de [Definições do Projeto](docs/referencias/definicoes-projeto.pdf) e [YOLOv8 Nutrition Analysis Pipeline](docs/referencias/pipeline-yolov8.pdf).
+Documentação do **FoodScan**, diário alimentar por fotografia e código de barras com IA, construída com **MkDocs + Material** a partir de [Definições do Projeto](docs/referencias/definicoes-projeto.pdf) e [YOLOv8 Nutrition Analysis Pipeline](docs/referencias/pipeline-yolov8.pdf).
 
 O conteúdo apresenta a ideia, o escopo, o público, os requisitos, a arquitetura, os riscos e as metas do projeto.
 
