@@ -1,0 +1,31 @@
+# Equipe e responsabilidades
+
+## Integrantes (Grupo 13)
+
+- Artur Braz Lopes
+- George Filipe Rodrigues de Lacerda
+- Jessika Cardoso do Nascimento
+- Pedro Henrique Silva de Sousa
+
+## Áreas (4 pessoas, 5 áreas)
+
+Desenvolvimento e CI/CD ficam com a mesma pessoa: o CI ainda não existe, e o que ele testa e publica é justamente a API, a interface e o Docker. As fronteiras entre as áreas seguem os [contratos](../reference/contratos.md).
+
+| Área | É dona de | Próximas tarefas |
+| --- | --- | --- |
+| 1. Engenharia de dados | `data/`, `src/mira/dados/`, `dvc.yaml`, carga no Postgres | Remoto do DVC (Drive ou S3) para `dvc pull` · TBCA para alimentos fora da TACO (verificar termos de uso) · Medidas que faltam (iogurte; "unidade" × "bife"/"filé") · Filtro por público na base ampliada; pool de conexões |
+| 2. Ciência de dados | `eval/`, `llm/prompts`, `pipelines/`, `rag/`; Etapa 7 | Completar o conjunto (15 → 40) e criar conjunto de validação sem curadoria · Erros de escolha: `qwen2.5:14b` e sensibilidade à ordem dos candidatos · Validar o LLM-juiz (kappa) e melhorar a fidelidade da orientação · Relatório comparativo da Etapa 7 |
+| 3. Desenvolvimento + CI/CD | `api/`, `app/`, Docker, `.github/` | GitHub Actions: ruff + pytest + dvc status + build da imagem; `main` protegida · Concorrência na API · Latência (~18 s): streaming e cache · Dockerfiles e deploy automático a cada tag `etapa-N` |
+| 4. Visão computacional | Fase 2 (outro repositório) e a rota `/v1/analisar-foto` | Contrato foto → `list[ItemExtraido]` · Dataset de pratos brasileiros com os 29 alimentos do MVP (LGPD) · Baseline de detecção e estimativa de porção |
+
+!!! warning "TODO"
+    Indicar qual integrante responde por cada área.
+
+## Tarefas de todos
+
+- [ ] Anotar as 25 refeições novas: cada pessoa anota e outra revisa.
+- [ ] Revisão cruzada nos PRs: dados ↔ ciência e dev ↔ visão.
+- [ ] Quem fecha uma etapa atualiza `DESENVOLVIMENTO.md` (seção, métricas, ADRs, questões) e cria a tag.
+- [ ] Uma pessoa fica responsável por conseguir um nutricionista para validar medidas e densidades.
+
+**Fontes:** [Definições do Projeto v2](../assets/pdfs/definicoes-projeto-v2.pdf), capa; [Estrutura do Mira](../assets/pdfs/estrutura-mira.pdf), seção 6.

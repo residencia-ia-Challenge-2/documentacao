@@ -1,29 +1,121 @@
-site_name: FoodScan — Grupo 13
+site_name: Mira (FoodScan) — Grupo 13
 site_url: https://residencia-ia-challenge-2.github.io/documentacao/
-site_description: Requisitos, arquitetura planejada e avaliação do FoodScan, diário alimentar por fotografia e código de barras.
+site_description: Documentação do Mira (FoodScan), análise nutricional de refeições com LLM, RAG e base TACO/IBGE. Challenge II, Residência em IA.
 site_author: Grupo 13
+copyright: Grupo 13 · Challenge II · Residência em IA
+
+# TODO: preencher quando o repositório de código for público/definido.
+# repo_url: https://github.com/residencia-ia-challenge-2/<repositorio-codigo>
+# edit_uri: edit/main/docs/
+
 theme:
   name: material
   language: pt-BR
   palette:
-    primary: teal
-    accent: green
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: teal
+      accent: green
+      toggle:
+        icon: material/weather-night
+        name: Mudar para modo escuro
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: teal
+      accent: green
+      toggle:
+        icon: material/weather-sunny
+        name: Mudar para modo claro
   features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
     - navigation.footer
+    - navigation.instant
+    - search.suggest
+    - search.highlight
     - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+    - toc.follow
+
 plugins:
   - search:
       lang: pt
+  # Mantém os endereços antigos (estrutura plana) funcionando após a reorganização.
+  - redirects:
+      redirect_maps:
+        projeto.md: produto/contexto.md
+        requisitos.md: produto/requisitos.md
+        arquitetura.md: architecture/index.md
+        riscos.md: produto/riscos-premissas.md
+        metricas.md: produto/metricas.md
+        fontes.md: sobre/fontes.md
+
 markdown_extensions:
+  - abbr
   - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
   - tables
   - toc:
       permalink: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
 nav:
   - Início: index.md
-  - Projeto e público: projeto.md
-  - Requisitos: requisitos.md
-  - Arquitetura: arquitetura.md
-  - Riscos e premissas: riscos.md
-  - Metas e indicadores: metricas.md
-  - Referências: fontes.md
+  - Produto:
+      - produto/index.md
+      - Contexto e público: produto/contexto.md
+      - Requisitos: produto/requisitos.md
+      - Riscos e premissas: produto/riscos-premissas.md
+      - Métricas de sucesso: produto/metricas.md
+  - Primeiros passos:
+      - getting-started/index.md
+      - Ambiente local: getting-started/instalacao.md
+      - Variáveis de ambiente: getting-started/variaveis-ambiente.md
+      - Estrutura do repositório: getting-started/estrutura-repositorio.md
+  - Arquitetura:
+      - architecture/index.md
+      - Pipeline de uma refeição: architecture/pipeline-refeicao.md
+      - Etapas e avaliação: architecture/etapas.md
+      - Regras fixas e ADRs: architecture/decisoes.md
+      - Visão computacional (fase 2): architecture/visao-computacional.md
+  - Guias:
+      - guides/index.md
+      - Como contribuir: guides/contribuir.md
+      - Rodar testes e lint: guides/testes.md
+      - Dados e DVC: guides/dados-dvc.md
+      - Avaliar um pipeline: guides/avaliar-pipeline.md
+      - Criar uma nova etapa: guides/nova-etapa.md
+      - Deploy: guides/deploy.md
+  - Referência:
+      - reference/index.md
+      - API HTTP: reference/api.md
+      - Contratos e modelos: reference/contratos.md
+      - Banco de dados e fontes: reference/dados.md
+      - Glossário: reference/glossario.md
+  - Sobre:
+      - sobre/index.md
+      - Equipe e responsabilidades: sobre/equipe.md
+      - Fontes e histórico: sobre/fontes.md
+      - Plano de migração: sobre/plano-migracao.md
