@@ -17,9 +17,11 @@ Estas regras **só mudam com um ADR** (Architecture Decision Record).
 
 Mudanças em `dominio/` ou `nutricao/` afetam todas as etapas e também exigem ADR.
 
+O `mira-dados` tem as próprias regras fixas para a base (nenhum número vem de LLM, nulo nunca vira zero, texto indexado sem números, avaliação fora da base, LGPD), cada uma com verificação automática. Ver [Banco de dados e fontes](../reference/dados.md#regras-fixas-dos-dados).
+
 ## Registro de decisões
 
-Os ADRs ficam no diário técnico `docs/DESENVOLVIMENTO.md`, no repositório de código.
+Os ADRs ficam no diário técnico `docs/DESENVOLVIMENTO.md`, no repositório `ia`. As decisões de engenharia de dados (D01 a D31) ficam em [Decisões de engenharia](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/arquitetura/decisoes.md), no `mira-dados`.
 
 | ADR | Decisão | Situação |
 | --- | --- | --- |

@@ -28,8 +28,9 @@ O repositório de código guarda a evolução do projeto em **etapas comparávei
 | Etapas 0 a 6 (fundação, baseline, RAG, banco, orientação, MVP) | Concluídas |
 | Etapa 7 (relatório comparativo) | Pendente |
 | LLM utilizada | Qwen 2.5 7B local, via Ollama (ADR-014) |
+| Base de dados (`mira-dados`) | Fases 1 a 3 concluídas: ETL, Data Quality, publicação atômica, Airflow; 597 alimentos e 26.389 produtos |
 | Visão computacional | Fase 2, em outro repositório |
-| CI/CD do código | A criar |
+| CI/CD | `ia`: a criar · `mira-dados`: workflow pronto, ainda não executado no GitHub |
 
 !!! warning "Divergências entre documentos"
     Os documentos de origem descrevem duas visões do produto: a de **produto** (foto do prato e código de barras como entrada principal) e a **técnica atual** (texto livre no MVP, foto na fase 2). As divergências estão listadas em [Fontes e histórico](sobre/fontes.md#divergencias-entre-documentos) e precisam ser resolvidas pela equipe.
@@ -38,7 +39,7 @@ O repositório de código guarda a evolução do projeto em **etapas comparávei
 
 <div class="grid cards" markdown>
 
-- :material-target: **[Produto](produto/index.md)** — problema, personas, requisitos, riscos e métricas.
+- :material-target: **[Produto](produto/index.md)** — problema, personas, [escopo](produto/escopo.md), requisitos, riscos e métricas.
 - :material-rocket-launch: **[Primeiros passos](getting-started/index.md)** — subir o MVP localmente e entender o repositório.
 - :material-sitemap: **[Arquitetura](architecture/index.md)** — camadas, pipeline v5, etapas e regras fixas.
 - :material-book-open-variant: **[Guias](guides/index.md)** — contribuir, testar, avaliar e criar etapas.

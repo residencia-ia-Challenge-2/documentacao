@@ -43,7 +43,10 @@ quadrantChart
 !!! note "Mudou na v2"
     Em **P03**, a v1 citava **USDA**; a v2 substituiu por **Open Food Facts**.
 
+!!! info "P03 na implementação atual"
+    A base publicada pelo `mira-dados` usa **TACO + medidas caseiras do IBGE (POF 2008-2009)** para os alimentos e **Open Food Facts** (recorte Brasil, 26.389 produtos) para os industrializados. A **TBCA** ainda não entra: depende dos termos de uso. Ver [Banco de dados e fontes](../reference/dados.md#fontes-de-dados).
+
 !!! warning "TODO"
-    A implementação atual usa **TACO + medidas caseiras do IBGE (POF)**, e a TBCA ainda está em avaliação (termos de uso). Atualizar P03 com as bases efetivamente usadas.
+    A equipe precisa decidir se reescreve a P03 com as bases efetivamente usadas.
 
 **Fontes:** [Definições do Projeto v2](../assets/pdfs/definicoes-projeto-v2.pdf), seções 6 e 7.

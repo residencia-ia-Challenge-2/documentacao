@@ -86,6 +86,7 @@ nav:
   - Produto:
       - produto/index.md
       - Contexto e público: produto/contexto.md
+      - Escopo: produto/escopo.md
       - Requisitos: produto/requisitos.md
       - Riscos e premissas: produto/riscos-premissas.md
       - Métricas de sucesso: produto/metricas.md

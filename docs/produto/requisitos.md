@@ -43,12 +43,12 @@ Correspondência entre os requisitos e o que a [Estrutura do Mira](../assets/pdf
 
 | Requisito | Situação no MVP (texto livre) | Observação |
 | --- | --- | --- |
-| RF01 | Parcial | Entrada atual é texto livre; foto na fase 2 (`/v1/analisar-foto`); código de barras não aparece na Estrutura. |
+| RF01 | Parcial | Entrada atual é texto livre; foto na fase 2 (`/v1/analisar-foto`). Para o código de barras, os dados já estão na base (26.389 produtos do Open Food Facts em `produtos_ean`), mas o `ia` ainda não os consome. |
 | RF02, RF07 | Fase 2 | Responsabilidade da área de visão computacional. |
-| RF03 | Implementado com outra abordagem | Cálculo determinístico em código, não pela LLM. |
+| RF03 | Implementado com outra abordagem | Cálculo determinístico em código, não pela LLM. Bases: TACO e medidas do IBGE; Open Food Facts na base, sem uso no MVP; TBCA futura. |
 | RF04 | Indício | Endpoint `/recalcular` existe; comportamento não documentado. |
 | RF05 | Não documentado | — |
-| RF06 | Não documentado | — |
+| RF06 | Futuro | OCR de rótulo listado como feature futura no `mira-dados`. |
 | RF08 | Implementado (parcial) | Orientação qualitativa baseada no Guia Alimentar e resultado com grupos. |
 | RNF01 | Não atendido | Latência p95 medida entre 17,5 s e 45,1 s (ver [Etapas](../architecture/etapas.md)). |
 | RNF05 | Não atendido | Hoje um *lock* serializa os pedidos na API. |
@@ -56,4 +56,4 @@ Correspondência entre os requisitos e o que a [Estrutura do Mira](../assets/pdf
 !!! warning "TODO"
     Confirmar a situação de RF04, RF05, RF06 e do código de barras no MVP, e definir se RNF01/RNF05 se aplicam ao MVP de texto ou apenas ao produto final.
 
-**Fontes:** [Definições do Projeto v2](../assets/pdfs/definicoes-projeto-v2.pdf), seção 5; [v1](../assets/pdfs/definicoes-projeto-v1.pdf), seção 5; [Estrutura do Mira](../assets/pdfs/estrutura-mira.pdf), seções 1, 2, 4 e 6.
+**Fontes:** [Definições do Projeto v2](../assets/pdfs/definicoes-projeto-v2.pdf), seção 5; [v1](../assets/pdfs/definicoes-projeto-v1.pdf), seção 5; [Estrutura do Mira](../assets/pdfs/estrutura-mira.pdf), seções 1, 2, 4 e 6; [`mira-dados`: Roadmap](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/operacao/roadmap.md).

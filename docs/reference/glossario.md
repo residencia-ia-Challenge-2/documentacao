@@ -6,6 +6,15 @@ ADR
 BM25
 :   Algoritmo de ranqueamento por palavras-chave (busca full-text).
 
+Bronze, Silver, Gold
+:   Camadas dos dados no `mira-dados`: fontes brutas (`data/raw/`), dados limpos (`data/interim/`) e base de serving (`data/processed/`).
+
+Curadoria
+:   Decisões humanas sobre os dados (ligações, sinônimos, grupos do Guia), versionadas no Git em `data/curadoria/`, cada linha com um `status`.
+
+Data Quality Gate
+:   Conjunto de regras do `mira-dados` que valida a Gold antes da publicação. Uma regra bloqueante reprovada impede a carga no banco.
+
 DVC
 :   *Data Version Control*. Versiona dados e reproduz o ETL com `dvc repro`.
 
@@ -29,6 +38,12 @@ LLM-juiz
 
 MAPE
 :   *Mean Absolute Percentage Error*. Erro percentual absoluto médio.
+
+mira-dados
+:   Nome do pacote do repositório `data`, dono do ciclo de vida dos dados do Mira.
+
+Open Food Facts
+:   Base colaborativa de produtos industrializados (licença ODbL). O Mira usa o recorte Brasil, com busca por código de barras.
 
 Ollama
 :   Ferramenta para executar LLMs localmente.

@@ -1,33 +1,103 @@
 # Banco de dados e fontes
 
-## PostgreSQL + pgvector
+A base de dados do Mira é produzida e publicada pelo repositório [`data`](https://github.com/residencia-ia-Challenge-2/data) (`mira-dados`). O repositório `ia` **só lê** o schema `mira`. Esta página resume o que um desenvolvedor do `ia` precisa saber; a especificação completa está na [documentação do `mira-dados`](https://github.com/residencia-ia-Challenge-2/data/tree/main/docs).
 
-Conteúdo da base:
+## Regras fixas dos dados
 
-| Conjunto | Uso no pipeline |
+| # | Regra | Como é garantida |
+| --- | --- | --- |
+| 1 | **Nenhum número vem de LLM.** Composição nutricional vem só de fontes oficiais ou curadas e de cálculo determinístico. | Nenhum módulo de ETL chama LLM; kcal ausente no Open Food Facts não é recalculada. |
+| 2 | **Nulo nunca vira zero.** Na TACO, `Tr` → `0.0`; `NA`, `*` e vazio → `NULL`. | Conversão no ETL + regra do Data Quality Gate. |
+| 3 | **Texto indexado sem números.** O texto vetorizado de um alimento tem só nome, grupo, preparo e sinônimos. | Regra do Data Quality Gate. |
+| 4 | **Avaliação separada da base.** O gabarito (`eval/` do `ia`) nunca entra no banco. | Regra do Data Quality Gate + teste. |
+| 5 | **LGPD.** Nenhum dado identificável versionado ou logado. | Recorte do Open Food Facts por lista de permissão de colunas (sem contribuidores). |
+
+## Conteúdo da base
+
+Números do relatório do Data Quality Gate (27 regras bloqueantes, 6 alertas), versão `0002` do schema.
+
+| Tabela | Linhas | Uso no pipeline | Fonte |
+| --- | ---: | --- | --- |
+| `alimentos` | 597 | Candidatos da busca e nutrientes por 100 g | TACO 4ª ed. |
+| `medidas` | 1.580 | Medida caseira → gramas (160 alimentos, 26,8 % da base) | IBGE POF 2008-2009 |
+| `sinonimos` | 237 | Normalização e busca de nomes (`macaxeira` → mandioca) | Curadoria + IBGE |
+| `grupos_guia` | 597 | Grupo do Guia e grau de processamento | Curadoria do Guia |
+| `documentos` | 19 | Catálogo das publicações, com público-alvo e condição de saúde | Guia + 18 publicações do MS |
+| `trechos_ampliados` | 2.424 | Trechos usados na orientação (base ampliada), com filtros por público | Guia + 18 publicações do MS |
+| `trechos` | 148 | **Legado:** só o Guia, lido pela `v5_rag_completo` | Guia Alimentar 2ª ed. |
+| `regras_oficiais` | 15 | 4 recomendações, regra de ouro e Dez passos do Guia, transcritos literalmente | Guia Alimentar 2ª ed. |
+| `produtos_ean` | 26.389 | Produtos industrializados por código de barras (o `ia` ainda não consome) | Open Food Facts, recorte Brasil |
+| `metadados` | — | Hashes, versão do schema, modelo de embeddings, aprovação do Data Quality | Publicação |
+
+```mermaid
+erDiagram
+    ALIMENTOS ||--o{ MEDIDAS : "conversões em gramas"
+    ALIMENTOS ||--o{ SINONIMOS : "é buscado por"
+    ALIMENTOS ||--|| GRUPOS_GUIA : "classificado em"
+    DOCUMENTOS ||--o{ TRECHOS_AMPLIADOS : "dividido em"
+    TRECHOS_AMPLIADOS ||--o{ REGRAS_OFICIAIS : "fonte literal de"
+    ALIMENTOS {
+        text alimento_id PK "taco_561"
+        double kcal "por 100 g, nullable"
+        text texto_indexado "sem números"
+        vector embedding "HNSW cosseno"
+    }
+    TRECHOS_AMPLIADOS {
+        text trecho_id PK
+        text documento_id FK
+        text publico_alvo
+        text condicao_saude
+        vector embedding "HNSW"
+    }
+    PRODUTOS_EAN {
+        text produto_id PK "ean_<gtin>"
+        text gtin "UNIQUE"
+        smallint nova_grupo "1..4"
+    }
+```
+
+O diagrama mostra só as colunas principais. Colunas, tipos e índices de todas as tabelas: [Modelo de dados (DER)](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/definicao/modelo_dados.md).
+
+## Busca e embeddings
+
+| Item | Valor |
 | --- | --- |
-| Alimentos | Candidatos da busca e valores nutricionais por 100 g (TACO). |
-| Medidas | Conversão de medida caseira em gramas (IBGE). |
-| Sinônimos | Normalização e busca dos nomes de alimentos. |
-| Trechos | Trechos do Guia Alimentar e publicações do MS usados na orientação. |
+| Banco | PostgreSQL 17 + `pgvector` |
+| Modelo de embeddings | `granite-embedding:278m` (via Ollama), o mesmo no `mira-dados` e no `ia` |
+| Dimensão dos vetores | 768 |
+| Janela do modelo | 512 tokens; o ETL corta os trechos por tokens reais, então nenhum passa da janela |
+| Índices | GIN (full-text) e HNSW (vetorial) em `alimentos` e nos trechos; `pg_trgm` em `alimentos.nome` e `sinonimos.termo` |
 
-!!! warning "TODO"
-    Documentar o schema: tabelas, colunas, tipos, chaves, índices full-text e vetoriais (dimensão dos embeddings). Um diagrama `erDiagram` em Mermaid é recomendado.
+## Publicação e versões
+
+A publicação é atômica: os dados entram em `mira_staging`, passam por um *smoke test* e só então trocam de lugar com o schema ativo `mira`. O schema anterior fica em `mira_anterior`, para *rollback*. Experimentos (por exemplo, outro modelo de embeddings) usam `mira_exp_<nome>` e nunca viram produção.
+
+O `ia` confere a base pela tabela `metadados`:
+
+| Chave | Para quê |
+| --- | --- |
+| `base_sha256` | Mesmo hash que o `hash_base()` do `ia` calcula sobre os Parquets da base |
+| `dq_aprovado` | Sempre `true`: a publicação é recusada sem Data Quality aprovado |
+| `versao_schema` | Revisão Alembic (hoje `0002`) |
+| `modelo_embeddings`, `dimensao` | Devem bater com a configuração do `ia` |
 
 ## Fontes de dados
 
-| Fonte | Uso | Situação |
-| --- | --- | --- |
-| TACO | Valores nutricionais por 100 g. | Em uso |
-| IBGE POF | Medidas caseiras → gramas. | Em uso |
-| Guia Alimentar e publicações do Ministério da Saúde | Orientação qualitativa e grupos. | Em uso |
-| TBCA | Alimentos fora da TACO. | Em avaliação (termos de uso) |
-| Open Food Facts | Produtos industrializados por código de barras (RF03, RF06, P03). | Previsto nas Definições; não citado na Estrutura |
-| USDA | Citado na P03 da v1 das Definições. | Removido na v2 |
+| Fonte | Uso | Licença | Situação |
+| --- | --- | --- | --- |
+| TACO 4ª ed. (NEPA/Unicamp, 2011) | Nutrientes por 100 g | Reprodução permitida com citação da fonte | Em uso |
+| IBGE POF 2008-2009 (Medidas Referidas) | Medidas caseiras → gramas | Dado público do IBGE | Em uso |
+| Guia Alimentar 2ª ed. + 18 publicações do MS | Orientação qualitativa, grupos e regras oficiais | Publicações públicas do MS | Em uso |
+| Open Food Facts (recorte Brasil) | Produtos por código de barras | ODbL 1.0 (base) + DbCL 1.0 (conteúdo); atribuição e *share-alike* | Na base; feature do app futura |
+| TBCA | Alimentos fora da TACO | A verificar | Futuro |
+| USDA | Citado na P03 da v1 das Definições | — | Removido na v2 |
 
-O MVP cobre **29 alimentos**.
+Cada fonte tem manifesto com URL e SHA-256 e arquivo `.dvc` no Git. Licenças completas em `data/curadoria/nutricional/fontes_tabelas.csv`; histórico de admissão no [Registro de datasets](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/REGISTRO_DATASETS.md).
 
-!!! warning "TODO"
-    Listar os 29 alimentos do MVP, as versões/edições de cada fonte e as licenças de uso.
+## Escopo da base: MVP e ampliada
 
-**Fontes:** [Estrutura do Mira](../assets/pdfs/estrutura-mira.pdf), seções 1, 3 e 6; [Definições do Projeto v2](../assets/pdfs/definicoes-projeto-v2.pdf), seções 5 e 7.
+A curadoria marca cada alimento com `escopo`: **`mvp`** (29 alimentos, a base da Etapa 0) ou **`ampliacao`** (131 alimentos, ADR-029). Com `base.ampliada: true` no `params.yaml` do `mira-dados` (o padrão atual), a busca usa a TACO inteira. Com `false`, volta à base da Etapa 0, o que mantém as etapas antigas comparáveis.
+
+A lista dos alimentos de cada escopo está em `data/curadoria/nutricional/alimentos.csv`, no `mira-dados`.
+
+**Fontes:** documentação do `mira-dados`: [Início](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/index.md), [Contexto e regras fixas](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/definicao/contexto.md), [Fontes](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/definicao/fontes.md), [Modelo de dados](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/definicao/modelo_dados.md) e [Integração com o `ia`](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/arquitetura/integracao_ia.md).

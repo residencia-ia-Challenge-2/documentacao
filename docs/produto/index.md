@@ -5,6 +5,7 @@ Esta seção reúne a definição de produto do **FoodScan**: o porquê do proje
 | Página | Conteúdo |
 | --- | --- |
 | [Contexto e público](contexto.md) | Cenário, problema, stakeholders, personas e questões norteadoras. |
+| [Escopo](escopo.md) | O que entra no MVP, na fase 2 e no futuro, o que está fora e qual repositório é dono de cada parte. |
 | [Requisitos](requisitos.md) | Requisitos funcionais (RF01–RF08) e não funcionais (RNF01–RNF05). |
 | [Riscos e premissas](riscos-premissas.md) | Riscos 1–5 com probabilidade, impacto e mitigação; premissas P01–P03. |
 | [Métricas de sucesso](metricas.md) | KPIs de produto e metas de desempenho. |

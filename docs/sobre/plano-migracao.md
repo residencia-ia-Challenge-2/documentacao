@@ -52,6 +52,9 @@ Registro da migração dos PDFs e da documentação plana anterior para este por
 | 13 | Como medir os KPIs de produto. | `produto/metricas.md` |
 | 14 | Quem é responsável por cada área. | `sobre/equipe.md` |
 
+!!! success "Resolvidas depois, com o `mira-dados`"
+    As lacunas **4** (obter `data/raw/`: remote S3 e `mira_dados.ingerir`) e **7** (schema do banco e modelo de embeddings) foram fechadas com a documentação do repositório [`data`](https://github.com/residencia-ia-Challenge-2/data). A lacuna **1** ficou parcial: faltam o endereço do repositório de visão computacional e o processo de acesso.
+
 ### Redundâncias
 
 | Redundância | Tratamento |

@@ -13,7 +13,7 @@ Desenvolvimento e CI/CD ficam com a mesma pessoa: o CI ainda não existe, e o qu
 
 | Área | É dona de | Próximas tarefas |
 | --- | --- | --- |
-| 1. Engenharia de dados | `data/`, `src/mira/dados/`, `dvc.yaml`, carga no Postgres | Remoto do DVC (Drive ou S3) para `dvc pull` · TBCA para alimentos fora da TACO (verificar termos de uso) · Medidas que faltam (iogurte; "unidade" × "bife"/"filé") · Filtro por público na base ampliada; pool de conexões |
+| 1. Engenharia de dados | Repositório [`data`](https://github.com/residencia-ia-Challenge-2/data) (`mira-dados`): fontes, ETL, curadoria, Data Quality, schema e publicação no Postgres | Revisão da curadoria pela equipe (472 linhas pendentes) · Ver a CI rodando no GitHub · `ia` lendo tudo do PostgreSQL em vez dos Parquets do disco · Cobertura de medidas caseiras (26,8 %) · TBCA (verificar termos de uso) · MWAA no Terraform |
 | 2. Ciência de dados | `eval/`, `llm/prompts`, `pipelines/`, `rag/`; Etapa 7 | Completar o conjunto (15 → 40) e criar conjunto de validação sem curadoria · Erros de escolha: `qwen2.5:14b` e sensibilidade à ordem dos candidatos · Validar o LLM-juiz (kappa) e melhorar a fidelidade da orientação · Relatório comparativo da Etapa 7 |
 | 3. Desenvolvimento + CI/CD | `api/`, `app/`, Docker, `.github/` | GitHub Actions: ruff + pytest + dvc status + build da imagem; `main` protegida · Concorrência na API · Latência (~18 s): streaming e cache · Dockerfiles e deploy automático a cada tag `etapa-N` |
 | 4. Visão computacional | Fase 2 (outro repositório) e a rota `/v1/analisar-foto` | Contrato foto → `list[ItemExtraido]` · Dataset de pratos brasileiros com os 29 alimentos do MVP (LGPD) · Baseline de detecção e estimativa de porção |
@@ -28,4 +28,7 @@ Desenvolvimento e CI/CD ficam com a mesma pessoa: o CI ainda não existe, e o qu
 - [ ] Quem fecha uma etapa atualiza `DESENVOLVIMENTO.md` (seção, métricas, ADRs, questões) e cria a tag.
 - [ ] Uma pessoa fica responsável por conseguir um nutricionista para validar medidas e densidades.
 
-**Fontes:** [Definições do Projeto v2](../assets/pdfs/definicoes-projeto-v2.pdf), capa; [Estrutura do Mira](../assets/pdfs/estrutura-mira.pdf), seção 6.
+!!! note "Atualizado com o `mira-dados`"
+    As tarefas antigas da Engenharia de dados "remoto do DVC" e "filtro por público na base ampliada" (lado dos dados) foram concluídas no `mira-dados`. O filtro na busca ainda falta no código do `ia`.
+
+**Fontes:** [Definições do Projeto v2](../assets/pdfs/definicoes-projeto-v2.pdf), capa; [Estrutura do Mira](../assets/pdfs/estrutura-mira.pdf), seção 6; [`mira-dados`: Roadmap](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/operacao/roadmap.md).

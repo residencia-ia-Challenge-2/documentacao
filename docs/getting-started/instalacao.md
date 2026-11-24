@@ -16,17 +16,12 @@
 ## 1. Obter o código e os dados
 
 ```bash
-git clone <URL-DO-REPOSITORIO-DE-CODIGO>  # TODO: URL
-cd <repositorio>
-# TODO: comando de instalação das dependências
-dvc pull   # requer o remoto do DVC configurado
+git clone git@github.com:residencia-ia-Challenge-2/ia.git
+git clone git@github.com:residencia-ia-Challenge-2/data.git   # mira-dados: base de dados
+# TODO: comando de instalação das dependências do ia
 ```
 
-!!! warning "Remoto do DVC ainda não existe"
-    A configuração de um remoto (Drive ou S3) para `dvc pull` é uma tarefa pendente da Engenharia de dados. Até lá, os dados processados precisam ser gerados localmente com `dvc repro` a partir de `data/raw/`.
-
-    !!! warning "TODO"
-        Explicar como um desenvolvedor novo obtém `data/raw/` enquanto o remoto não existe.
+Os dados vêm do `mira-dados`: o remote do DVC (`s3://mira-dados/dvc`) já existe, e sem acesso a ele `python -m mira_dados.ingerir` baixa as fontes das URLs originais e confere o SHA-256. Ver [Dados e DVC](../guides/dados-dvc.md#regenerar-os-dados).
 
 ## 2. Preparar a LLM
 
@@ -39,10 +34,25 @@ ollama pull qwen2.5:7b
 
 ## 3. Subir o banco e carregar a base
 
+O banco é publicado pelo `mira-dados`. O `ia` só lê.
+
 ```bash
-docker compose up -d
-python -m mira.repositorios.postgres carregar
+# no repositório mira-dados
+make up            # PostgreSQL na porta 5433 + S3 local
+dvc pull data/raw/*.dvc && dvc repro
+make db-publish    # staging → smoke → swap (Ollama ligado)
 ```
+
+No `.env` do `ia`, aponte para esse banco:
+
+```bash
+DATABASE_URL=postgresql://mira:mira@localhost:5433/mira_dados
+```
+
+O `mira-dados` usa a porta 5433 para conviver com o `mira-postgres` do `ia` (5432).
+
+??? note "Caminho legado (só o `ia`)"
+    O `ia` ainda tem o carregador antigo (`docker compose up -d` e `python -m mira.repositorios.postgres carregar`). Use-o só para reproduzir etapas antigas; a base oficial é a do `mira-dados`.
 
 ## 4. Subir a API e a interface
 
