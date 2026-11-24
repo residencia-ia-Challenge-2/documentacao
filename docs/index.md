@@ -1,40 +1,51 @@
-# FoodScan
+# Mira (FoodScan)
 
-**Grupo 13 · Saúde, nutrição e bem-estar digital**
+**Grupo 13 · Challenge II · Residência em IA · Saúde, nutrição e bem-estar digital**
 
-O **FoodScan** propõe simplificar o diário alimentar por meio de fotografias de refeições e leitura de códigos de barras de produtos industrializados. O objetivo é reduzir o esforço de registro e apoiar o acompanhamento nutricional diário.
+O **Mira** (nome técnico do projeto **FoodScan**) automatiza o diário alimentar. Na versão atual (MVP), a pessoa descreve a refeição em texto livre — por exemplo, *"2 conchas de feijão e 1 filé de frango"* — e o Mira devolve itens, gramas, calorias, macronutrientes e uma orientação qualitativa do prato, baseada no Guia Alimentar e em outras publicações do Ministério da Saúde.
+
+A análise por **foto do prato** (visão computacional) é a **fase 2** do projeto.
+
+## Ideia central
+
+!!! abstract "A LLM entende e escolhe; os números vêm da base"
+    A LLM interpreta o texto e **escolhe** entre alimentos candidatos. Os **números** vêm sempre da base de dados (TACO + medidas caseiras do IBGE) e são calculados em código determinístico:
+
+    ```text
+    nutriente = gramas × valor por 100 g
+    ```
+
+O repositório de código guarda a evolução do projeto em **etapas comparáveis**: cada etapa é um pipeline completo, avaliado no mesmo conjunto de teste. Veja [Etapas e avaliação](architecture/etapas.md).
 
 ## Questão central
 
 > Como podemos usar a inteligência artificial para tornar o controle nutricional diário uma experiência simples, precisa e sem atritos, substituindo a digitação manual de alimentos?
 
-## Objetivo e limites
+## Estado atual
 
-Automatizar o diário alimentar para reduzir a digitação manual e apoiar o acompanhamento nutricional. O problema, as personas e as necessidades estão em [Projeto e público](projeto.md).
+| Item | Situação |
+| --- | --- |
+| Etapas 0 a 6 (fundação, baseline, RAG, banco, orientação, MVP) | Concluídas |
+| Etapa 7 (relatório comparativo) | Pendente |
+| LLM utilizada | Qwen 2.5 7B local, via Ollama (ADR-014) |
+| Base de dados (`mira-dados`) | Fases 1 a 3 concluídas: ETL, Data Quality, publicação atômica, Airflow; 597 alimentos e 26.389 produtos |
+| Visão computacional | Fase 2, em outro repositório |
+| CI/CD | `ia`: a criar · `mira-dados`: workflow pronto, ainda não executado no GitHub |
 
-A estimativa de porções e a identificação de ingredientes invisíveis são limitações reconhecidas do projeto.
+!!! warning "Divergências entre documentos"
+    Os documentos de origem descrevem duas visões do produto: a de **produto** (foto do prato e código de barras como entrada principal) e a **técnica atual** (texto livre no MVP, foto na fase 2). As divergências estão listadas em [Fontes e histórico](sobre/fontes.md#divergencias-entre-documentos) e precisam ser resolvidas pela equipe.
 
-## O que a solução prevê
+## Por onde começar
 
-1. Registrar uma refeição por foto ou um produto por código de barras.
-2. Identificar os alimentos e estimar calorias e macronutrientes.
-3. Permitir correções manuais dos resultados.
-4. Organizar o histórico por data e tipo de refeição.
+<div class="grid cards" markdown>
 
-## Inteligência artificial
+- :material-target: **[Produto](produto/index.md)** — problema, personas, [escopo](produto/escopo.md), requisitos, riscos e métricas.
+- :material-rocket-launch: **[Primeiros passos](getting-started/index.md)** — subir o MVP localmente e entender o repositório.
+- :material-sitemap: **[Arquitetura](architecture/index.md)** — camadas, pipeline v5, etapas e regras fixas.
+- :material-book-open-variant: **[Guias](guides/index.md)** — contribuir, testar, avaliar e criar etapas.
+- :material-code-json: **[Referência](reference/index.md)** — API, contratos Pydantic, banco e glossário.
+- :material-account-group: **[Sobre](sobre/index.md)** — equipe, fontes e plano de migração da documentação.
 
-- **YOLOv8:** visão computacional para identificar e segmentar alimentos nas fotos dos pratos e detectar o garfo usado como referência de escala.
-- **`qwen3:8b`:** único LLM do projeto, responsável por processar os dados textuais e estruturados e compor a resposta em JSON. Os testes do modelo de linguagem serão executados localmente.
+</div>
 
-Os fluxos de processamento estão descritos em [Arquitetura](arquitetura.md).
-
-## Navegação
-
-- [Projeto e público](projeto.md): problema, personas e stakeholders.
-- [Requisitos](requisitos.md): funcionalidades e metas de qualidade.
-- [Arquitetura](arquitetura.md): componentes do diagrama, fluxos e dependências.
-- [Riscos e premissas](riscos.md): limitações previstas e mitigações propostas.
-- [Metas e indicadores](metricas.md): desempenho, registro e satisfação dos usuários.
-- [Referências](fontes.md): documentos que fundamentam o projeto.
-
-**Fontes:** Definições do Projeto, seções 1, 2, 5 e 10; diagrama técnico, página 1. Consulte os [documentos de referência](fontes.md).
+**Fontes:** [Estrutura do projeto Mira](assets/pdfs/estrutura-mira.pdf) (10/11/2026); [Definições do Projeto v2](assets/pdfs/definicoes-projeto-v2.pdf), seção 10.

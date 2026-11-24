@@ -1,10 +1,8 @@
-# FoodScan — Documentação · Grupo 13
+# Mira (FoodScan) — Documentação · Grupo 13
 
-Documentação do **FoodScan**, diário alimentar por fotografia e código de barras com IA, construída com **MkDocs + Material** a partir de [Definições do Projeto](docs/referencias/definicoes-projeto.pdf) e [YOLOv8 Nutrition Analysis Pipeline](docs/referencias/pipeline-yolov8.pdf).
+Documentação do **Mira (FoodScan)**, análise nutricional de refeições com LLM, RAG e base TACO/IBGE (visão computacional na fase 2), construída com **MkDocs + Material**.
 
-O conteúdo apresenta a ideia, o escopo, o público, os requisitos, a arquitetura, os riscos e as metas do projeto.
-
-O projeto utiliza **YOLOv8 para visão computacional** e **`qwen3:8b` como único modelo de linguagem**, com testes locais do LLM.
+O conteúdo foi migrado dos PDFs do projeto, preservados em [`docs/assets/pdfs/`](docs/assets/pdfs/). O mapa da migração, as lacunas e as divergências entre documentos estão em [`docs/sobre/plano-migracao.md`](docs/sobre/plano-migracao.md).
 
 ## GitHub Pages
 
@@ -18,16 +16,16 @@ Para habilitar a hospedagem no repositório, selecione **Settings → Pages → 
 
 ```text
 docs/
-  index.md          Visão geral e ideia do projeto
-  projeto.md        Público, personas e questões norteadoras
-  requisitos.md     Requisitos funcionais e não funcionais
-  arquitetura.md    Componentes e fluxos de processamento
-  riscos.md         Riscos, mitigações e premissas
-  metricas.md       Metas e indicadores de sucesso
-  fontes.md         Referências documentais
-  referencias/      PDFs de referência
-mkdocs.yml          Configuração e navegação do site
-requirements-docs.txt  Dependência da documentação
+  index.md            Visão geral, ideia central e estado atual
+  produto/            Contexto, personas, requisitos, riscos e métricas
+  getting-started/    Ambiente local, variáveis de ambiente, estrutura do repositório
+  architecture/       Camadas, pipeline v5, etapas, regras fixas/ADRs, visão computacional
+  guides/             Contribuir, testes, DVC, avaliação, nova etapa, deploy
+  reference/          API, contratos Pydantic, banco de dados, glossário
+  sobre/              Equipe, fontes e histórico, plano de migração
+  assets/pdfs/        PDFs originais (somente histórico)
+mkdocs.yml            Configuração, plugins e navegação do site
+requirements-docs.txt Dependências da documentação
 ```
 
 ## Executar a documentação localmente
@@ -56,7 +54,8 @@ O HTML será gerado em `site/`. Esse comando gera o site localmente; não o publ
 
 - O conteúdo fica em `docs/`, em Markdown.
 - O menu e o tema ficam em `mkdocs.yml`.
-- As referências estão em `docs/fontes.md`.
-- Os PDFs de referência ficam em `docs/referencias/`.
+- Diagramas são escritos em Mermaid (blocos ` ```mermaid `).
+- Pendências usam `!!! warning "TODO"`.
+- Os PDFs históricos ficam em `docs/assets/pdfs/`; fontes e divergências em `docs/sobre/fontes.md`.
 
 Referências da ferramenta: [MkDocs](https://www.mkdocs.org/getting-started/) e [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/).
