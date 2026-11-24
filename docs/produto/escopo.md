@@ -18,7 +18,7 @@ O que o projeto entrega agora, o que fica para depois e o que não faz parte del
 
 | Entrega | Situação | Onde |
 | --- | --- | --- |
-| Análise por **foto do prato** (segmentação, estimativa de porção) | Não iniciado no código | Repositório de visão computacional |
+| Análise por **foto do prato** (segmentação, estimativa de porção) | Primeira versão: YOLOv8s-seg com 12 categorias, servido em `POST /identificar` e chamado pelo `backend` (`/v1/identificar-foto`); devolve só sugestões de categoria, sem porção | [`ModeloVisao`](https://github.com/residencia-ia-Challenge-2/ModeloVisao) |
 | Leitura de **código de barras** | Dados prontos (26.389 produtos do Open Food Facts em `produtos_ean`); o `ia` ainda não consome | `mira-dados` (dados) · `ia` (feature) |
 | Filtro por público e condição de saúde na busca de trechos | Dados prontos; código não | `mira-dados` (dados) · `ia` (busca) |
 
@@ -29,7 +29,7 @@ O que o projeto entrega agora, o que fica para depois e o que não faz parte del
 - Histórico de refeições por data e tipo (RF05).
 - App móvel com fluxo de 3 toques (RNF02); o MVP usa Streamlit.
 - Deploy em nuvem (AWS: S3, RDS, ECR e MWAA); hoje tudo roda em instâncias locais.
-- Multiagentes sobre a base do `mira-dados`.
+- Multiagentes para texto e foto sobre a base do `mira-dados` (ver [proposta](../architecture/multiagentes.md)).
 
 ## Fora do escopo
 
@@ -47,7 +47,8 @@ O projeto é dividido em repositórios com donos e fronteiras claras.
 | [`documentacao`](https://github.com/residencia-ia-Challenge-2/documentacao) (este site) | Produto, arquitetura geral, guias e referência | Código |
 | [`ia`](https://github.com/residencia-ia-Challenge-2/ia) | Pipelines RAG (v1 a v5), LLM e prompts, avaliação (`eval/`), API FastAPI e Streamlit | DDL do banco, carga destrutiva, download de fontes |
 | [`data`](https://github.com/residencia-ia-Challenge-2/data) (`mira-dados`) | Fontes brutas, ETL, curadoria, Data Quality, migrações do banco e publicação | API, prompts, pipelines RAG, gabarito de avaliação |
-| Visão computacional | Dataset de fotos, modelo e estimativa de porção (fase 2) | — |
+| [`ModeloVisao`](https://github.com/residencia-ia-Challenge-2/ModeloVisao) | Pesos do detector e serviço de identificação por foto (`POST /identificar`) | Cálculo, porções e nutrientes |
+| [`backend`](https://github.com/residencia-ia-Challenge-2/backend) | API pública `/v1/*` para o app Android; chama o `ia` e o `ModeloVisao` | — |
 
 ```mermaid
 flowchart LR
@@ -60,6 +61,6 @@ flowchart LR
 A separação vale nos dois sentidos: o `ia` **só lê** o banco, e o `mira-dados` **nunca** lê o gabarito de avaliação. Detalhes em [Banco de dados e fontes](../reference/dados.md).
 
 !!! warning "TODO"
-    Informar o endereço do repositório de visão computacional e confirmar com a equipe se o código de barras entra na fase 2 ou fica para o futuro.
+    Confirmar com a equipe se o código de barras entra na fase 2 ou fica para o futuro.
 
 **Fontes:** [Estrutura do Mira](../assets/pdfs/estrutura-mira.pdf), seções 1, 2 e 6; [`mira-dados`: Contexto e regras fixas](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/definicao/contexto.md) e [Roadmap](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/operacao/roadmap.md).

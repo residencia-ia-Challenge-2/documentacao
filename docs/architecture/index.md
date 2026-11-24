@@ -38,6 +38,7 @@ flowchart TB
 - [Pipeline de uma refeição](pipeline-refeicao.md) — os 6 passos do pipeline v5.
 - [Etapas e avaliação](etapas.md) — evolução v1 → v5 e métricas comparativas.
 - [Regras fixas e ADRs](decisoes.md) — o que só muda com um ADR.
-- [Visão computacional (fase 2)](visao-computacional.md) — arquitetura de referência para foto e código de barras.
+- [Visão computacional](visao-computacional.md) — detector atual (`ModeloVisao`), limites e arquitetura de referência original.
+- [Sistema multiagentes multimodal (proposta)](multiagentes.md) — texto e foto, orquestrador em código, agentes especialistas e roteiro da Etapa 8.
 
 **Fontes:** [Estrutura do Mira](../assets/pdfs/estrutura-mira.pdf), seções 1 e 2; [`mira-dados`: Modelo de dados](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/definicao/modelo_dados.md).

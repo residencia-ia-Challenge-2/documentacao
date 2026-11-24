@@ -100,7 +100,8 @@ nav:
       - Pipeline de uma refeição: architecture/pipeline-refeicao.md
       - Etapas e avaliação: architecture/etapas.md
       - Regras fixas e ADRs: architecture/decisoes.md
-      - Visão computacional (fase 2): architecture/visao-computacional.md
+      - Visão computacional: architecture/visao-computacional.md
+      - Sistema multiagentes (proposta): architecture/multiagentes.md
   - Guias:
       - guides/index.md
       - Como contribuir: guides/contribuir.md

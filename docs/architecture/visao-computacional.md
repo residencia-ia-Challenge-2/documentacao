@@ -1,26 +1,49 @@
-# Visão computacional (fase 2)
+# Visão computacional
 
-A análise por foto é a **fase 2** do projeto, mantida em **outro repositório** pela área de visão computacional.
+A análise por foto é a **fase 2** do projeto. A primeira versão do detector e do serviço está no repositório [`ModeloVisao`](https://github.com/residencia-ia-Challenge-2/ModeloVisao), e o `backend` já o chama a partir do app Android.
 
-## Contrato com o pipeline atual
+## Estado atual
 
-A foto vira uma **lista de `ItemExtraido`** e, daí em diante, segue o **mesmo pipeline** do texto. **A visão não estima kcal.**
+| Item | Situação |
+| --- | --- |
+| Modelo | YOLOv8s-seg (Ultralytics 8.4.212) ajustado por 100 épocas, imagens de 640 px, treinado em 13/11/2026 |
+| Classes (12) | `Arroz`, `Massa`, `Tuberculo`, `CarneV`, `CarneB`, `CarneP`, `Ovo`, `Peixe_FrutosMar`, `Grao`, `Folhas`, `Vegetais_Cru`, `Vegetais_Cozidos` |
+| Métricas de validação | Caixa: mAP50 0,47, precisão 0,48, recall 0,50. Máscara: mAP50 0,46, mAP50-95 0,35 |
+| Serviço | `POST /identificar` com imagem em Base64 (JPEG, PNG ou WebP, até 3 MiB). Devolve `sugestoes`: rótulos sem repetição, com confiança mínima de 0,25 |
+| Integração | App Android → `backend` `POST /v1/identificar-foto` → `ModeloVisao` `/identificar` → sugestões para a pessoa conferir e editar |
+| Execução | CPU, um pedido por vez (trava no serviço); imagem Docker própria |
+| Licença | Ultralytics: AGPL-3.0 |
 
 ```mermaid
 flowchart LR
-    F(["Foto do prato"]) --> V["Visão computacional<br/>(fase 2)"]
-    T(["Texto livre"]) --> X["1. Extração (LLM)"]
-    V -->|"list[ItemExtraido]"| P["Passos 2–6 do pipeline<br/>busca · escolha · cálculo · Guia · orientação"]
-    X -->|"list[ItemExtraido]"| P
-    P --> R(["ResultadoRefeicao"])
+    APP(["App Android"]) -->|"foto"| BE["backend<br/>/v1/identificar-foto"]
+    BE -->|"/identificar"| VIS["ModeloVisao<br/>YOLOv8s-seg"]
+    VIS -->|"sugestoes: ['arroz', 'carne']"| BE
+    BE --> APP
+    APP -->|"pessoa confirma e edita"| AN["backend<br/>/v1/analisar-refeicao"]
+    AN --> IA["ia: identificação<br/>+ orientação"]
 ```
 
-Rota prevista: `/v1/analisar-foto`.
+**A visão não estima kcal nem gramas.** Ela identifica categorias visuais; tipo de alimento, preparo e quantidade dependem da confirmação da pessoa e do cálculo no `backend`.
 
-### Tarefas da fase 2
+### Limites do modelo atual
 
-- Dataset de pratos brasileiros com os **29 alimentos do MVP**, respeitando a LGPD.
-- Baseline de detecção e estimativa de porção.
+| Limite | Consequência |
+| --- | --- |
+| Categorias grosseiras ("grão", "carne") em vez de alimentos da TACO | Cada categoria precisa ser convertida em alimentos candidatos e confirmada |
+| Acurácia longe da meta (mAP50 0,46 × 85 % do RNF03) | A confirmação pela pessoa é obrigatória |
+| O serviço descarta máscaras, caixas e confianças | Não dá para estimar porção nem priorizar perguntas |
+| Sem classe de talher ou outro objeto de referência | O RF07 (escala pelo talher) não é possível com este modelo |
+| Significado de `CarneV`, `CarneB` e `CarneP` não documentado | O serviço mostra só "carne"; a pessoa confirma qual é |
+| Origem e licença do dataset (`dataset_nutrici_ia`) não documentadas | Risco de uso e de reprodução do treino |
+| Sem conjunto de fotos com gabarito | Não há como comparar versões do modelo nem medir o canal de foto ponta a ponta |
+
+A proposta para tratar esses limites com agentes (Percepção, Hipóteses e Confirmação) está em [Sistema multiagentes multimodal](multiagentes.md).
+
+!!! warning "TODO"
+    - Documentar as classes `CarneV`, `CarneB` e `CarneP`, a origem e a licença do dataset e o processo de treino.
+    - Avaliar a licença AGPL-3.0 do Ultralytics para um serviço exposto em rede.
+    - Medir a latência p95 do serviço.
 
 ## Arquitetura de referência original
 
@@ -91,18 +114,19 @@ flowchart TB
 
 | Aspecto | Referência original (PDF) | Arquitetura atual (MVP) |
 | --- | --- | --- |
-| Entrada | Foto do prato + garfo; código de barras | Texto livre; foto na fase 2 |
-| Endpoints | `/analisar-prato/`, `/analisar-produto/` | `/analisar-refeicao`, `/orientar`, `/recalcular`; `/v1/analisar-foto` (fase 2) |
+| Entrada | Foto do prato + garfo; código de barras | Texto livre; foto com sugestões de categoria confirmadas pela pessoa; código de barras na fase 2 |
+| Visão | YOLOv8-Seg (comida) + YOLOv8-Box (garfo) → áreas em cm² | YOLOv8s-seg com 12 categorias; sem garfo nem áreas |
+| Endpoints | `/analisar-prato/`, `/analisar-produto/` | `backend`: `/v1/identificar-foto`, `/v1/analisar-refeicao`, `/v1/orientar`; `ModeloVisao`: `/identificar` |
 | LLM | GPT-4o-mini / Claude (API) | Qwen 2.5 7B local via Ollama (ADR-014) |
 | Quem calcula | LLM devolve JSON com calorias e macros | Código determinístico: gramas × TACO |
 | Validação | Schema JSON (Structured Outputs) | Pydantic em toda saída de LLM |
 | Base nutricional | Open Food Facts (produtos) | TACO + medidas caseiras IBGE; PostgreSQL + pgvector |
-| Front-end | App móvel | Streamlit (MVP) |
-| MLOps | Data lake, Roboflow/CVAT, Evidently/MLflow, CI/CD | DVC; CI/CD a criar |
+| Front-end | App móvel | App Android (via `backend`) e Streamlit (demonstração) |
+| MLOps | Data lake, Roboflow/CVAT, Evidently/MLflow, CI/CD | Dados: DVC, Airflow e CI no `mira-dados`. Visão: pesos versionados no Git, sem pipeline de treino no repositório |
 
 !!! warning "TODO"
     - Definir se o fluxo de **código de barras + Open Food Facts + OCR** (RF01, RF06) continua no escopo e em qual fase.
     - Definir se as ferramentas de MLOps do diagrama original (Roboflow/CVAT, Evidently, MLflow, data lake) serão adotadas na fase 2.
     - A documentação anterior citava `qwen3:8b` como LLM; esse modelo não aparece em nenhum PDF. Confirmar que foi substituído pelo Qwen 2.5 7B (ADR-014).
 
-**Fontes:** [YOLOv8 Nutrition Analysis Pipeline](../assets/pdfs/pipeline-yolov8.pdf); [Estrutura do Mira](../assets/pdfs/estrutura-mira.pdf), seções 3 e 6.
+**Fontes:** [YOLOv8 Nutrition Analysis Pipeline](../assets/pdfs/pipeline-yolov8.pdf); [Estrutura do Mira](../assets/pdfs/estrutura-mira.pdf), seções 3 e 6; `README.md`, `service/app.py` e metadados do checkpoint do [`ModeloVisao`](https://github.com/residencia-ia-Challenge-2/ModeloVisao); `src/mira_backend/app.py` do [`backend`](https://github.com/residencia-ia-Challenge-2/backend).

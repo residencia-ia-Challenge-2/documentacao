@@ -44,13 +44,15 @@ Correspondência entre os requisitos e o que a [Estrutura do Mira](../assets/pdf
 | Requisito | Situação no MVP (texto livre) | Observação |
 | --- | --- | --- |
 | RF01 | Parcial | Entrada atual é texto livre; foto na fase 2 (`/v1/analisar-foto`). Para o código de barras, os dados já estão na base (26.389 produtos do Open Food Facts em `produtos_ean`), mas o `ia` ainda não os consome. |
-| RF02, RF07 | Fase 2 | Responsabilidade da área de visão computacional. |
+| RF02 | Parcial | YOLOv8s-seg com 12 categorias no `ModeloVisao`; o serviço devolve só rótulos, sem usar as máscaras. Ver [Visão computacional](../architecture/visao-computacional.md). |
+| RF07 | Não atendido | O modelo atual não detecta talheres nem outro objeto de referência. |
 | RF03 | Implementado com outra abordagem | Cálculo determinístico em código, não pela LLM. Bases: TACO e medidas do IBGE; Open Food Facts na base, sem uso no MVP; TBCA futura. |
 | RF04 | Indício | Endpoint `/recalcular` existe; comportamento não documentado. |
 | RF05 | Não documentado | — |
 | RF06 | Futuro | OCR de rótulo listado como feature futura no `mira-dados`. |
 | RF08 | Implementado (parcial) | Orientação qualitativa baseada no Guia Alimentar e resultado com grupos. |
 | RNF01 | Não atendido | Latência p95 medida entre 17,5 s e 45,1 s (ver [Etapas](../architecture/etapas.md)). |
+| RNF03 | Não atendido | mAP50 de máscara de 0,46 no detector atual, contra a meta de 85 %. |
 | RNF05 | Não atendido | Hoje um *lock* serializa os pedidos na API. |
 
 !!! warning "TODO"
