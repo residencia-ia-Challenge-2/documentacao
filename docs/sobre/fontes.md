@@ -24,7 +24,7 @@ Pontos em que os documentos se contradizem e que a equipe precisa resolver.
 | 3 | Quem calcula kcal/macros | LLM (RF03 v2) | Código determinístico; "números só da base" | [Requisitos](../produto/requisitos.md), [Regras fixas](../architecture/decisoes.md) |
 | 4 | LLM | GPT-4o-mini / Claude (Pipeline YOLOv8); `qwen3:8b` (docs anteriores, sem PDF de origem) | Qwen 2.5 7B via Ollama (ADR-014) | [Visão computacional](../architecture/visao-computacional.md) |
 | 5 | Endpoints | `/analisar-prato/`, `/analisar-produto/` | `/analisar-refeicao`, `/orientar`, `/recalcular`, `/v1/analisar-foto` | [API](../reference/api.md) |
-| 6 | Bases nutricionais | TACO, TBCA, Open Food Facts (v2); USDA (v1) | TACO + medidas IBGE + Open Food Facts (na base, sem uso no MVP); TBCA futura | [Banco e fontes](../reference/dados.md) |
+| 6 | Bases nutricionais | TACO, TBCA, Open Food Facts (v2); USDA (v1) | TACO + medidas IBGE; Open Food Facts pela API ao vivo no `backend` e na base do `mira-dados` (ainda não usada); TBCA futura | [Banco e fontes](../reference/dados.md) |
 | 7 | Desempenho | RNF01 < 3 s | p95 medido de 17,5 s a 45,1 s | [Etapas](../architecture/etapas.md) |
 | 8 | Personas | Lucas (24, < 5 s) e Camila (36) — v1 | Pedro (24, < 8 s) e Ana (30) — v2 | [Contexto](../produto/contexto.md#personas) |
 | 9 | Front-end | App móvel, 3 toques (RNF02) | Streamlit (MVP) | [Arquitetura](../architecture/index.md) |

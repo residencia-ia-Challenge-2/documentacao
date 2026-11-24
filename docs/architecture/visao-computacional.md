@@ -114,7 +114,7 @@ flowchart TB
 
 | Aspecto | Referência original (PDF) | Arquitetura atual (MVP) |
 | --- | --- | --- |
-| Entrada | Foto do prato + garfo; código de barras | Texto livre; foto com sugestões de categoria confirmadas pela pessoa; código de barras na fase 2 |
+| Entrada | Foto do prato + garfo; código de barras | Texto livre; foto com sugestões de categoria confirmadas pela pessoa; código de barras no `backend` (API do Open Food Facts) |
 | Visão | YOLOv8-Seg (comida) + YOLOv8-Box (garfo) → áreas em cm² | YOLOv8s-seg com 12 categorias; sem garfo nem áreas |
 | Endpoints | `/analisar-prato/`, `/analisar-produto/` | `backend`: `/v1/identificar-foto`, `/v1/analisar-refeicao`, `/v1/orientar`; `ModeloVisao`: `/identificar` |
 | LLM | GPT-4o-mini / Claude (API) | Qwen 2.5 7B local via Ollama (ADR-014) |
@@ -125,7 +125,7 @@ flowchart TB
 | MLOps | Data lake, Roboflow/CVAT, Evidently/MLflow, CI/CD | Dados: DVC, Airflow e CI no `mira-dados`. Visão: pesos versionados no Git, sem pipeline de treino no repositório |
 
 !!! warning "TODO"
-    - Definir se o fluxo de **código de barras + Open Food Facts + OCR** (RF01, RF06) continua no escopo e em qual fase.
+    - Definir se o OCR da tabela nutricional (RF06) continua no escopo como *fallback* do código de barras, e em qual fase.
     - Definir se as ferramentas de MLOps do diagrama original (Roboflow/CVAT, Evidently, MLflow, data lake) serão adotadas na fase 2.
     - A documentação anterior citava `qwen3:8b` como LLM; esse modelo não aparece em nenhum PDF. Confirmar que foi substituído pelo Qwen 2.5 7B (ADR-014).
 

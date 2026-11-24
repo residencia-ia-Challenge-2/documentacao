@@ -26,7 +26,7 @@ Números do relatório do Data Quality Gate (27 regras bloqueantes, 6 alertas), 
 | `trechos_ampliados` | 2.424 | Trechos usados na orientação (base ampliada), com filtros por público | Guia + 18 publicações do MS |
 | `trechos` | 148 | **Legado:** só o Guia, lido pela `v5_rag_completo` | Guia Alimentar 2ª ed. |
 | `regras_oficiais` | 15 | 4 recomendações, regra de ouro e Dez passos do Guia, transcritos literalmente | Guia Alimentar 2ª ed. |
-| `produtos_ean` | 26.389 | Produtos industrializados por código de barras (o `ia` ainda não consome) | Open Food Facts, recorte Brasil |
+| `produtos_ean` | 26.389 | Produtos industrializados por código de barras (ainda não usada: o `backend` consulta a API do Open Food Facts ao vivo) | Open Food Facts, recorte Brasil |
 | `metadados` | — | Hashes, versão do schema, modelo de embeddings, aprovação do Data Quality | Publicação |
 
 ```mermaid
@@ -81,6 +81,9 @@ O `ia` confere a base pela tabela `metadados`:
 | `versao_schema` | Revisão Alembic (hoje `0002`) |
 | `modelo_embeddings`, `dimensao` | Devem bater com a configuração do `ia` |
 
+!!! note "Cópias da base"
+    Além do PostgreSQL, a base existe em Parquet em dois lugares: no `ia` (os 6 arquivos do `hash_base()`) e no `backend` (`alimentos` e `medidas_caseiras`, em `MIRA_DADOS_DIR`), que faz o cálculo dos nutrientes com a própria cópia. O `backend` compara o `versao_base` devolvido pelo `ia` com o hash da sua cópia e recusa o pedido se forem diferentes.
+
 ## Fontes de dados
 
 | Fonte | Uso | Licença | Situação |
@@ -88,7 +91,7 @@ O `ia` confere a base pela tabela `metadados`:
 | TACO 4ª ed. (NEPA/Unicamp, 2011) | Nutrientes por 100 g | Reprodução permitida com citação da fonte | Em uso |
 | IBGE POF 2008-2009 (Medidas Referidas) | Medidas caseiras → gramas | Dado público do IBGE | Em uso |
 | Guia Alimentar 2ª ed. + 18 publicações do MS | Orientação qualitativa, grupos e regras oficiais | Publicações públicas do MS | Em uso |
-| Open Food Facts (recorte Brasil) | Produtos por código de barras | ODbL 1.0 (base) + DbCL 1.0 (conteúdo); atribuição e *share-alike* | Na base; feature do app futura |
+| Open Food Facts (recorte Brasil) | Produtos por código de barras | ODbL 1.0 (base) + DbCL 1.0 (conteúdo); atribuição e *share-alike* | Na base (`produtos_ean`); o `backend` usa hoje a API ao vivo |
 | TBCA | Alimentos fora da TACO | A verificar | Futuro |
 | USDA | Citado na P03 da v1 das Definições | — | Removido na v2 |
 

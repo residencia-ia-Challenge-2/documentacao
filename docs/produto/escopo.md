@@ -13,13 +13,14 @@ O que o projeto entrega agora, o que fica para depois e o que não faz parte del
 | Base de serving: TACO, medidas caseiras do IBGE, sinônimos, grupos do Guia e trechos documentais | Publicada | `mira-dados` |
 | Etapas comparáveis (v1 a v5) avaliadas no mesmo conjunto | Etapas 0 a 6 concluídas; Etapa 7 pendente | `ia` |
 | Interface de demonstração (Streamlit) e API (FastAPI) | Implementado | `ia` |
+| API pública para o app Android, com o cálculo autoritativo dos nutrientes | Implementado | `backend` |
+| Leitura de **código de barras** (`/v1/produtos/{codigo}`) | Implementado, consultando ao vivo a API pública do Open Food Facts. A tabela `produtos_ean` do `mira-dados` (26.389 produtos com checagem de qualidade) ainda não é usada | `backend` |
 
 ## Fase 2
 
 | Entrega | Situação | Onde |
 | --- | --- | --- |
 | Análise por **foto do prato** (segmentação, estimativa de porção) | Primeira versão: YOLOv8s-seg com 12 categorias, servido em `POST /identificar` e chamado pelo `backend` (`/v1/identificar-foto`); devolve só sugestões de categoria, sem porção | [`ModeloVisao`](https://github.com/residencia-ia-Challenge-2/ModeloVisao) |
-| Leitura de **código de barras** | Dados prontos (26.389 produtos do Open Food Facts em `produtos_ean`); o `ia` ainda não consome | `mira-dados` (dados) · `ia` (feature) |
 | Filtro por público e condição de saúde na busca de trechos | Dados prontos; código não | `mira-dados` (dados) · `ia` (busca) |
 
 ## Futuro (sem fase definida)
@@ -61,6 +62,6 @@ flowchart LR
 A separação vale nos dois sentidos: o `ia` **só lê** o banco, e o `mira-dados` **nunca** lê o gabarito de avaliação. Detalhes em [Banco de dados e fontes](../reference/dados.md).
 
 !!! warning "TODO"
-    Confirmar com a equipe se o código de barras entra na fase 2 ou fica para o futuro.
+    Decidir se o código de barras passa a consultar a tabela `produtos_ean` antes da API ao vivo do Open Food Facts (ver [proposta multiagentes](../architecture/multiagentes.md#fluxo-do-codigo-de-barras)).
 
 **Fontes:** [Estrutura do Mira](../assets/pdfs/estrutura-mira.pdf), seções 1, 2 e 6; [`mira-dados`: Contexto e regras fixas](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/definicao/contexto.md) e [Roadmap](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/operacao/roadmap.md).
