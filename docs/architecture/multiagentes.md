@@ -281,7 +281,7 @@ Já existe no `backend` (`GET /v1/produtos/{codigo}` e `POST /v1/produtos/calcul
 
 ## Ferramentas
 
-As consultas seguem o [contrato de leitura para RAG e agentes](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/arquitetura/rag_agentes.md) do `mira-dados`:
+As consultas seguem o [contrato de leitura para RAG e agentes](../dados/rag-agentes.md):
 
 | Ferramenta | Consulta | Observação |
 | --- | --- | --- |
@@ -434,4 +434,4 @@ O canal de foto precisa de um **conjunto de fotos com gabarito** (itens e gramas
 ??? info "Histórico desta proposta"
     A primeira versão, escrita a partir do `ia` e do `mira-dados`, colocava o orquestrador no `ia`, extraía o perfil do texto da refeição pela LLM, usava a LLM para formular até 3 perguntas sobre a foto e tratava o código de barras como feature futura. A conferência com o código do `backend` mostrou que ele já orquestra os pedidos, faz o cálculo com uma cópia própria da base e já atende código de barras pela API do Open Food Facts. A proposta foi ajustada a isso.
 
-**Fontes:** `docs/ANDAMENTO_RAG_MULTIAGENTES.md`, `src/mira/service/app.py` e `src/mira/pipelines/rag_comum.py` do `ia`; `README.md` e `service/app.py` do [`ModeloVisao`](https://github.com/residencia-ia-Challenge-2/ModeloVisao); `src/mira_backend/app.py`, `produtos.py` e `auth.py` do [`backend`](https://github.com/residencia-ia-Challenge-2/backend); [`mira-dados`: Contrato de leitura para RAG e agentes](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/arquitetura/rag_agentes.md) e [Curadoria](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/definicao/curadoria.md).
+**Fontes:** `docs/ANDAMENTO_RAG_MULTIAGENTES.md`, `src/mira/service/app.py` e `src/mira/pipelines/rag_comum.py` do `ia`; `README.md` e `service/app.py` do [`ModeloVisao`](https://github.com/residencia-ia-Challenge-2/ModeloVisao); `src/mira_backend/app.py`, `produtos.py` e `auth.py` do [`backend`](https://github.com/residencia-ia-Challenge-2/backend); [Contrato para RAG e agentes](../dados/rag-agentes.md) e [Curadoria](../dados/curadoria.md).

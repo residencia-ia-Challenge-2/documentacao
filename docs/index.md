@@ -42,6 +42,7 @@ O repositório de código guarda a evolução do projeto em **etapas comparávei
 - :material-target: **[Produto](produto/index.md)** — problema, personas, [escopo](produto/escopo.md), requisitos, riscos e métricas.
 - :material-rocket-launch: **[Primeiros passos](getting-started/index.md)** — subir o MVP localmente e entender o repositório.
 - :material-sitemap: **[Arquitetura](architecture/index.md)** — camadas, pipeline v5, etapas e regras fixas.
+- :material-database: **[Dados](dados/index.md)** — arquitetura de dados, fontes, ETL, Data Quality e publicação.
 - :material-book-open-variant: **[Guias](guides/index.md)** — contribuir, testar, avaliar e criar etapas.
 - :material-code-json: **[Referência](reference/index.md)** — API, contratos Pydantic, banco e glossário.
 - :material-account-group: **[Sobre](sobre/index.md)** — equipe, fontes e plano de migração da documentação.

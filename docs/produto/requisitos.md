@@ -58,4 +58,4 @@ Correspondência entre os requisitos e o que a [Estrutura do Mira](../assets/pdf
 !!! warning "TODO"
     Confirmar a situação de RF04, RF05 e RF06 no MVP, e definir se RNF01/RNF05 se aplicam ao MVP de texto ou apenas ao produto final.
 
-**Fontes:** [Definições do Projeto v2](../assets/pdfs/definicoes-projeto-v2.pdf), seção 5; [v1](../assets/pdfs/definicoes-projeto-v1.pdf), seção 5; [Estrutura do Mira](../assets/pdfs/estrutura-mira.pdf), seções 1, 2, 4 e 6; [`mira-dados`: Roadmap](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/operacao/roadmap.md).
+**Fontes:** [Definições do Projeto v2](../assets/pdfs/definicoes-projeto-v2.pdf), seção 5; [v1](../assets/pdfs/definicoes-projeto-v1.pdf), seção 5; [Estrutura do Mira](../assets/pdfs/estrutura-mira.pdf), seções 1, 2, 4 e 6; [Roadmap dos dados](../dados/roadmap.md).

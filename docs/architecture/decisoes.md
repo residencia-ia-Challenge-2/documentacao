@@ -21,7 +21,7 @@ O `mira-dados` tem as próprias regras fixas para a base (nenhum número vem de 
 
 ## Registro de decisões
 
-Os ADRs ficam no diário técnico `docs/DESENVOLVIMENTO.md`, no repositório `ia`. As decisões de engenharia de dados (D01 a D31) ficam em [Decisões de engenharia](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/arquitetura/decisoes.md), no `mira-dados`.
+Os ADRs ficam no diário técnico `docs/DESENVOLVIMENTO.md`, no repositório `ia`. As decisões de engenharia de dados (D01 a D31) ficam em [Decisões de engenharia de dados](../dados/decisoes.md).
 
 | ADR | Decisão | Situação |
 | --- | --- | --- |

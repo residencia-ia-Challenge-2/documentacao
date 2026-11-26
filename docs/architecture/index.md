@@ -30,7 +30,7 @@ flowchart TB
 | API | FastAPI (servida com Uvicorn) | Expõe os pipelines via HTTP. Ver [API HTTP](../reference/api.md). |
 | LLM | Qwen 2.5 7B local via Ollama (ADR-014) | Extração, escolha e orientação. Clientes alternativos: Anthropic e falso. |
 | Banco | PostgreSQL 17 + pgvector | Alimentos, medidas, sinônimos, grupos, trechos e produtos. Publicado pelo `mira-dados`; o `ia` só lê. Ver [Banco de dados](../reference/dados.md). |
-| Dados | DVC, Alembic, Airflow (repositório `mira-dados`) | Versionamento das fontes, ETL, Data Quality, migrações e publicação. |
+| Dados | DVC, Alembic, Airflow (repositório `mira-dados`) | Versionamento das fontes, ETL, Data Quality, migrações e publicação. Ver [Arquitetura de dados](../dados/index.md). |
 | Busca | BM25 + embeddings + RRF (manual, LangChain ou pgvector) | Recuperação de candidatos e trechos. Embeddings `granite-embedding:278m` (768 dimensões). |
 
 ## Nesta seção
@@ -41,4 +41,4 @@ flowchart TB
 - [Visão computacional](visao-computacional.md) — detector atual (`ModeloVisao`), limites e arquitetura de referência original.
 - [Sistema multiagentes multimodal (proposta)](multiagentes.md) — texto e foto, orquestrador em código, agentes especialistas e roteiro da Etapa 8.
 
-**Fontes:** [Estrutura do Mira](../assets/pdfs/estrutura-mira.pdf), seções 1 e 2; [`mira-dados`: Modelo de dados](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/definicao/modelo_dados.md).
+**Fontes:** [Estrutura do Mira](../assets/pdfs/estrutura-mira.pdf), seções 1 e 2; [Modelo de dados](../dados/modelo-dados.md).

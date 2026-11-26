@@ -31,4 +31,4 @@ Desenvolvimento e CI/CD ficam com a mesma pessoa: o CI ainda não existe, e o qu
 !!! note "Atualizado com o `mira-dados`"
     As tarefas antigas da Engenharia de dados "remoto do DVC" e "filtro por público na base ampliada" (lado dos dados) foram concluídas no `mira-dados`. O filtro na busca ainda falta no código do `ia`.
 
-**Fontes:** [Definições do Projeto v2](../assets/pdfs/definicoes-projeto-v2.pdf), capa; [Estrutura do Mira](../assets/pdfs/estrutura-mira.pdf), seção 6; [`mira-dados`: Roadmap](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/operacao/roadmap.md).
+**Fontes:** [Definições do Projeto v2](../assets/pdfs/definicoes-projeto-v2.pdf), capa; [Estrutura do Mira](../assets/pdfs/estrutura-mira.pdf), seção 6; [Roadmap dos dados](../dados/roadmap.md).

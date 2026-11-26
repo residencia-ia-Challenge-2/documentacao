@@ -102,6 +102,21 @@ nav:
       - Regras fixas e ADRs: architecture/decisoes.md
       - Visão computacional: architecture/visao-computacional.md
       - Sistema multiagentes (proposta): architecture/multiagentes.md
+  - Dados:
+      - dados/index.md
+      - Fontes de dados: dados/fontes.md
+      - Registro de datasets: dados/registro-datasets.md
+      - Curadoria e rotulação: dados/curadoria.md
+      - Modelo de dados: dados/modelo-dados.md
+      - Pipeline ETL: dados/etl.md
+      - Data Quality e contratos: dados/qualidade.md
+      - Publicação e orquestração: dados/publicacao.md
+      - Infraestrutura: dados/infraestrutura.md
+      - Estrutura do repositório: dados/repositorio.md
+      - Integração com o ia: dados/integracao-ia.md
+      - Contrato para RAG e agentes: dados/rag-agentes.md
+      - Decisões de engenharia: dados/decisoes.md
+      - Roadmap e status: dados/roadmap.md
   - Guias:
       - guides/index.md
       - Como contribuir: guides/contribuir.md
@@ -121,3 +136,4 @@ nav:
       - Equipe e responsabilidades: sobre/equipe.md
       - Fontes e histórico: sobre/fontes.md
       - Plano de migração: sobre/plano-migracao.md
+      - Blueprint de dados (histórico): sobre/blueprint-dados.md

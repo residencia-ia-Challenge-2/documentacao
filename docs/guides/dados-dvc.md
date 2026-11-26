@@ -1,6 +1,6 @@
 # Dados e DVC
 
-Mudanças em fontes, ETL, curadoria ou carga do banco são feitas no repositório [`data`](https://github.com/residencia-ia-Challenge-2/data) (`mira-dados`), não no `ia`. Este guia resume o fluxo; os comandos completos estão no [Guia rápido do `mira-dados`](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/operacao/guia_rapido.md).
+Mudanças em fontes, ETL, curadoria ou carga do banco são feitas no repositório [`data`](https://github.com/residencia-ia-Challenge-2/data) (`mira-dados`), não no `ia`. Este guia resume o fluxo; a explicação de cada camada está na seção [Dados](../dados/index.md).
 
 !!! info "Transição"
     O `ia` ainda guarda uma cópia do ETL antigo (`src/mira/dados/`) e dos Parquets em `data/processed/`, que ele usa para conferir o `base_sha256`. A fonte da verdade é o `mira-dados`: não altere o ETL no `ia`.
@@ -43,6 +43,25 @@ O remote do DVC é `s3://mira-dados/dvc`: SeaweedFS em desenvolvimento, Amazon S
 
 O Airflow (`make up-airflow`) roda o mesmo ciclo pela DAG `mira_ciclo_dados`.
 
+## Comandos do dia a dia
+
+```bash
+python -m mira_dados.ingerir --verificar   # confere o SHA-256 das 23 fontes
+dvc metrics show                           # relatorio_base.json, relatorio_off.json, relatorio_dq.json
+dvc push                                   # Bronze + cache para o remote S3 (credenciais em .dvc/config.local)
+make db-status                             # metadados de mira, mira_staging e mira_anterior
+make db-rollback                           # volta para o mira_anterior (rodar de novo desfaz)
+docker compose exec airflow-scheduler airflow dags trigger mira_ciclo_dados
+
+make lint                                  # ruff
+make test                                  # os testes de banco pulam sem PostgreSQL de teste
+make test-dag                              # DagBag com o Airflow real (imagem)
+make tf-validate                           # Terraform, via container
+make help                                  # lista todos os alvos
+```
+
+O `.env` (copiado de `.env.example`) define `DATABASE_URL`, `OLLAMA_BASE_URL` e `MIRA_DADOS_TEST_DATABASE_URL`.
+
 ## Estágios do `dvc.yaml`
 
 | Estágio | Saída | Camada |
@@ -82,6 +101,12 @@ Em desenvolvimento entram os três status. Em produção, só `aprovado_equipe` 
     3. Sinônimo: inclua em `sinonimos.csv`.
     4. Rode `dvc repro`, `ruff check . && pytest` e publique.
 
+??? example "Atualizar o Open Food Facts"
+    Siga o passo a passo em [Registro de datasets](../dados/registro-datasets.md#como-atualizar-o-recorte) e registre a nova carga no histórico daquela página.
+
+??? example "Publicar um experimento com outro modelo de embeddings"
+    `alembic -x schema=mira_exp_bgem3 -x embedding_dim=1024 upgrade head` mostra o DDL. Para carregar, ajuste `embeddings.modelo` e `embeddings.dimensao` no `params.yaml` e rode `python -m mira_dados.publicar_postgres --fase staging --schema mira_exp_bgem3`. Experimentos nunca passam pelo swap. Veja [Contrato para RAG e agentes](../dados/rag-agentes.md#ablacao-de-corte-ou-de-modelo).
+
 ## LGPD
 
 Nenhuma refeição real de usuário é versionada. Do Open Food Facts entram só as colunas de uma lista de permissão, sem dados de contribuidores.
@@ -97,4 +122,4 @@ Nenhuma refeição real de usuário é versionada. Do Open Food Facts entram só
 | CI do `mira-dados` executando no GitHub | O workflow só foi validado localmente |
 | TBCA, OCR de rótulo, imagens | Features futuras |
 
-**Fontes:** documentação do `mira-dados`: [Pipelines](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/pipelines/index.md), [Curadoria](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/definicao/curadoria.md), [Guia rápido](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/operacao/guia_rapido.md) e [Roadmap](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/operacao/roadmap.md).
+**Fontes:** `Makefile`, `dvc.yaml` e `.env.example` do repositório `data`; seção [Dados](../dados/index.md): [Pipeline ETL](../dados/etl.md), [Curadoria](../dados/curadoria.md) e [Roadmap](../dados/roadmap.md).
