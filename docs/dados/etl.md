@@ -225,4 +225,4 @@ Mudar um parâmetro invalida só os estágios que dependem dele: o DVC sabe diss
 
 O ETL foi portado linha a linha do `ia`, com as mesmas versões de pandas, pyarrow e PyMuPDF. Com `chunking.max_tokens: null`, o `dvc repro` gera Parquets **byte a byte idênticos** aos do `ia`, tanto com `base.ampliada: false` quanto com `true`. A prova é o script `scripts/comparar_invariancia.py`.
 
-**Fontes:** documentação do `mira-dados`: [Pipelines](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/pipelines/index.md), [Bronze](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/pipelines/bronze.md), [Silver](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/pipelines/silver.md) e [Gold](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/pipelines/gold.md); `dvc.yaml` e `params.yaml` do `mira-dados`.
+**Fontes:** `dvc.yaml`, `params.yaml`, `src/mira_dados/silver/` e `src/mira_dados/gold/`, no repositório `data`.

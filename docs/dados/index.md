@@ -112,11 +112,20 @@ Números de `data/processed/relatorio_dq.json` (Data Quality Gate aprovado, 35 r
 
 | Página | Conteúdo |
 | --- | --- |
-| [Fontes de dados](fontes.md) | Inventário, licenças, manifestos, particularidades de cada fonte e fontes planejadas. |
+| [Fontes de dados](fontes.md) | Inventário, licenças, manifestos, particularidades de cada fonte e protocolo de admissão. |
+| [Registro de datasets](registro-datasets.md) | Histórico de aumento da base e registro de admissão de cada fonte. |
 | [Pipeline ETL](etl.md) | Bronze, Silver e Gold: o que cada estágio faz, grafo do DVC e parâmetros. |
 | [Data Quality e contratos](qualidade.md) | Contratos Pydantic e Pandera, regras bloqueantes, alertas e garantias do relatório. |
 | [Curadoria e rotulação](curadoria.md) | Tipos de rotulação, arquivos, status de aprovação e situação da revisão. |
+| [Modelo de dados](modelo-dados.md) | DER, tabelas, índices, vocabulários controlados e `metadados`. |
 | [Publicação e orquestração](publicacao.md) | Carga atômica no PostgreSQL, migrações Alembic e DAG do Airflow. |
 | [Infraestrutura](infraestrutura.md) | Stack local e AWS, docker-compose, remote DVC, CI e Terraform. |
+| [Estrutura do repositório](repositorio.md) | Pastas do repositório `data` e o que vai para o Git. |
+| [Integração com o `ia`](integracao-ia.md) | Contrato entre os repositórios e provas de compatibilidade. |
+| [Contrato para RAG e agentes](rag-agentes.md) | Prontidão, filtros de público e consultas SQL prontas para cada agente. |
+| [Decisões de engenharia](decisoes.md) | Decisões D01 a D31 e pendências de decisão. |
+| [Roadmap e status](roadmap.md) | Fases concluídas, próximos passos e pendências de dados. |
 
-**Fontes:** documentação do `mira-dados`: [Início](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/index.md), [Arquitetura geral](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/arquitetura/index.md) e [Contexto e regras fixas](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/definicao/contexto.md); `data/processed/relatorio_dq.json`.
+Os comandos para regenerar e publicar a base estão no guia [Dados e DVC](../guides/dados-dvc.md).
+
+**Fontes:** `README.md`, `dvc.yaml`, `src/mira_dados/` e `data/processed/relatorio_dq.json`, no repositório `data`; [Blueprint de dados](../sobre/blueprint-dados.md), seções 1 a 3.

@@ -64,4 +64,4 @@ A separação vale nos dois sentidos: o `ia` **só lê** o banco, e o `mira-dado
 !!! warning "TODO"
     Decidir se o código de barras passa a consultar a tabela `produtos_ean` antes da API ao vivo do Open Food Facts (ver [proposta multiagentes](../architecture/multiagentes.md#fluxo-do-codigo-de-barras)).
 
-**Fontes:** [Estrutura do Mira](../assets/pdfs/estrutura-mira.pdf), seções 1, 2 e 6; [`mira-dados`: Contexto e regras fixas](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/definicao/contexto.md) e [Roadmap](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/operacao/roadmap.md).
+**Fontes:** [Estrutura do Mira](../assets/pdfs/estrutura-mira.pdf), seções 1, 2 e 6; [Arquitetura de dados](../dados/index.md#regras-fixas-dos-dados) e [Roadmap dos dados](../dados/roadmap.md).

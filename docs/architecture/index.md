@@ -41,4 +41,4 @@ flowchart TB
 - [Visão computacional](visao-computacional.md) — detector atual (`ModeloVisao`), limites e arquitetura de referência original.
 - [Sistema multiagentes multimodal (proposta)](multiagentes.md) — texto e foto, orquestrador em código, agentes especialistas e roteiro da Etapa 8.
 
-**Fontes:** [Estrutura do Mira](../assets/pdfs/estrutura-mira.pdf), seções 1 e 2; [`mira-dados`: Modelo de dados](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/definicao/modelo_dados.md).
+**Fontes:** [Estrutura do Mira](../assets/pdfs/estrutura-mira.pdf), seções 1 e 2; [Modelo de dados](../dados/modelo-dados.md).

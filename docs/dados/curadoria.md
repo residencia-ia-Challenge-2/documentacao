@@ -99,4 +99,4 @@ Nos CSVs, as linhas `mvp` ficam **antes** das `ampliacao`, porque o ETL remove d
 
 O passo a passo para aprovar uma linha ou incluir um alimento está no guia [Dados e DVC](../guides/dados-dvc.md#curadoria).
 
-**Fontes:** documentação do `mira-dados`: [Curadoria e rotulação](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/definicao/curadoria.md) e [Contrato para RAG e agentes](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/arquitetura/rag_agentes.md); `data/processed/relatorio_dq.json`.
+**Fontes:** `data/curadoria/`, `src/mira_dados/curadoria.py` e `data/processed/relatorio_dq.json`, no repositório `data`.

@@ -138,4 +138,4 @@ Alertas não bloqueiam a publicação, mas apontam trabalho pendente.
 | `complementos_sha256` | `documentos_catalogo` e `regras_oficiais`, que só o `mira-dados` produz | Publicação |
 | `produtos_ean_sha256` | `produtos_ean` | Publicação |
 
-**Fontes:** documentação do `mira-dados`: [Contratos de dados](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/definicao/contratos.md) e [Data Quality Gate](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/pipelines/qualidade.md); `src/mira_dados/qualidade.py` e `data/processed/relatorio_dq.json`.
+**Fontes:** `src/mira_dados/contratos.py`, `src/mira_dados/qualidade.py`, `tests/test_qualidade.py` e `data/processed/relatorio_dq.json`, no repositório `data`.

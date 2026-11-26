@@ -133,6 +133,31 @@ Registro da migração dos PDFs e da documentação plana anterior para este por
 
 Os redirecionamentos são feitos pelo plugin `mkdocs-redirects`, para não quebrar links já publicados.
 
+### Documentação do repositório `data` (26/11/2026)
+
+A pasta `docs/` do repositório `data` (`mira-dados`), que tinha um MkDocs próprio, foi migrada para a seção [Dados](../dados/index.md). O repositório `data` ficou só com código, dados versionados e um README que aponta para este portal. Os números foram conferidos contra `relatorio_dq.json`, `relatorio_off.json` e os manifestos na data da migração.
+
+| Página no `data` | Nova página |
+| --- | --- |
+| `index.md`, `arquitetura/index.md`, `definicao/contexto.md` | `dados/index.md` |
+| `definicao/fontes.md` | `dados/fontes.md` |
+| `REGISTRO_DATASETS.md` | `dados/registro-datasets.md` |
+| `definicao/curadoria.md` | `dados/curadoria.md` |
+| `definicao/modelo_dados.md` | `dados/modelo-dados.md` |
+| `definicao/contratos.md`, `pipelines/qualidade.md` | `dados/qualidade.md` |
+| `pipelines/index.md`, `bronze.md`, `silver.md`, `gold.md` | `dados/etl.md` |
+| `pipelines/publicacao.md`, `pipelines/orquestracao.md` | `dados/publicacao.md` |
+| `arquitetura/stack.md`, `arquitetura/infra.md` | `dados/infraestrutura.md` |
+| `arquitetura/repositorio.md` | `dados/repositorio.md` |
+| `arquitetura/integracao_ia.md` | `dados/integracao-ia.md` |
+| `arquitetura/rag_agentes.md` | `dados/rag-agentes.md` |
+| `arquitetura/decisoes.md` | `dados/decisoes.md` |
+| `operacao/roadmap.md` | `dados/roadmap.md` |
+| `operacao/guia_rapido.md` | `guides/dados-dvc.md` |
+| `BLUEPRINT_ENGENHARIA_DADOS.md` | `sobre/blueprint-dados.md` (histórico, sem alteração de conteúdo) |
+
+Correções feitas na migração: 35 regras bloqueantes e 7 alertas no Data Quality Gate (eram citadas 27 e 6), 23 fontes conferidas pelo ingestor (eram 22), 2.276 trechos nas 18 publicações (eram 2.245) e 17 tasks na DAG.
+
 ## 3. Convenções adotadas
 
 - Diagramas sempre em Mermaid (nunca imagem exportada), para serem editáveis via PR.

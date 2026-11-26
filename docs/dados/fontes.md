@@ -69,7 +69,7 @@ Imagens de produto (CC BY-SA) não são ingeridas.
 
 ## Protocolo de admissão
 
-Toda fonte nova passa por este checklist **antes** de ter ETL, e a decisão fica registrada no [Registro de datasets](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/REGISTRO_DATASETS.md) do `mira-dados`:
+Toda fonte nova passa por este checklist **antes** de ter ETL, e a decisão fica registrada no [Registro de datasets](registro-datasets.md), junto com o histórico de aumento da base:
 
 - [ ] **Licença e termos de uso:** permissão explícita para uso no projeto, com as consequências registradas.
 - [ ] **Chave canônica e rastreabilidade:** prefixo único de id (`taco_*`, `tbca_*`, `ean_*`) e URL + SHA-256 no manifesto.
@@ -77,14 +77,4 @@ Toda fonte nova passa por este checklist **antes** de ter ETL, e a decisão fica
 - [ ] **Impacto na avaliação:** nenhuma regra pode ser derivada das consultas de teste do `ia`.
 - [ ] **LGPD:** nenhum campo identificável entra no Bronze.
 
-## Histórico de aumento da base
-
-| Data | Mudança | Volume |
-| --- | --- | --- |
-| 05/11/2026 | Base inicial do MVP (no `ia`): TACO + IBGE + Guia | 597 alimentos, 11.801 medidas, 147 trechos |
-| 05/11/2026 | Base ampliada: + 18 publicações do MS (ADR-028) | 2.394 trechos de 19 documentos |
-| 17/11/2026 | Migração do ETL para o `mira-dados` (Fase 1) | Mesmas fontes, Parquets idênticos aos do `ia` |
-| 17/11/2026 | + Open Food Facts, recorte Brasil | 38.425 produtos no Bronze → 26.389 na Gold |
-| 24/11/2026 | Corte por tokens reais, público e condição de saúde, regras oficiais | 2.424 trechos (nenhum acima de 512 tokens), 15 regras |
-
-**Fontes:** documentação do `mira-dados`: [Fontes de dados](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/definicao/fontes.md), [Registro de datasets](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/REGISTRO_DATASETS.md) e [Bronze](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/pipelines/bronze.md); manifestos em `data/curadoria/`; `data/processed/relatorio_off.json`.
+**Fontes:** manifestos em `data/curadoria/`, `data/raw/FONTES.md`, `src/mira_dados/ingerir.py`, `src/mira_dados/ingerir_off.py` e `data/processed/relatorio_off.json`, no repositório `data`.

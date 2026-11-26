@@ -99,4 +99,4 @@ O pgvector não precisa de instalação no RDS: a migração Alembic `0001` cria
 | Medidas caseiras em só 26,8 % dos alimentos | Itens sem gramas para o usuário |
 | Grupo NOVA em só 25 % dos produtos | Orientação sobre ultraprocessados incompleta |
 
-**Fontes:** documentação do `mira-dados`: [Stack local ↔ AWS](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/arquitetura/stack.md), [Infraestrutura, CI/CD e IaC](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/arquitetura/infra.md), [Estrutura do repositório](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/arquitetura/repositorio.md) e [Roadmap](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/operacao/roadmap.md).
+**Fontes:** `docker-compose.yml`, `.dvc/config`, `.github/workflows/ci.yml`, `infra/terraform/` e `requirements.lock`, no repositório `data`.

@@ -49,4 +49,4 @@ flowchart LR
 
 A curadoria entra no estágio Gold (`base_nutricional`, `grupos_guia`, `catalogo`, `regras_oficiais`). Ver [Dados e DVC](../guides/dados-dvc.md).
 
-**Fontes:** [Estrutura do Mira](../assets/pdfs/estrutura-mira.pdf), seções 2 e 3; [`mira-dados`: Estrutura do repositório](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/arquitetura/repositorio.md).
+**Fontes:** [Estrutura do Mira](../assets/pdfs/estrutura-mira.pdf), seções 2 e 3; [Estrutura do repositório `data`](../dados/repositorio.md).

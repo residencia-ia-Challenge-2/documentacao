@@ -9,7 +9,7 @@
 | Definições do Projeto — v1 | 2026 | Primeira versão: RF01–RF05, RNF01–RNF04, riscos 1–3. | Substituída pela v2 | [PDF](../assets/pdfs/definicoes-projeto-v1.pdf) |
 | YOLOv8 Nutrition Analysis Pipeline | 29/10/2026 | Diagrama da arquitetura original: prato (YOLOv8), produto (Open Food Facts/OCR), LLM, validação JSON, MLOps. | Histórico — substituído pela Estrutura do Mira | [PDF](../assets/pdfs/pipeline-yolov8.pdf) |
 
-Além dos PDFs, a [documentação do `mira-dados`](https://github.com/residencia-ia-Challenge-2/data/tree/main/docs) é a fonte **vigente para dados**: fontes, ETL, curadoria, schema do banco e publicação. As páginas daqui resumem e linkam para ela, sem duplicar os detalhes.
+A documentação de dados (fontes, ETL, curadoria, schema do banco e publicação), que antes ficava em `docs/` no repositório `data`, foi migrada para a seção [Dados](../dados/index.md) deste portal em 26/11/2026. O repositório `data` guarda só código, dados versionados e um README que aponta para cá. A especificação original que deu origem a ele está em [Blueprint de dados (histórico)](blueprint-dados.md).
 
 O conteúdo dos PDFs foi migrado para Markdown; os arquivos originais ficam em `docs/assets/pdfs/` apenas como histórico. **A fonte da verdade passa a ser esta documentação.**
 

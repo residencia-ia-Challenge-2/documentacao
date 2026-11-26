@@ -158,4 +158,4 @@ O `ia` lê a tabela `mira.metadados` para saber se o banco corresponde à base q
 
 A compatibilidade foi provada com o código do `ia` **sem alteração**: os testes de integração `test_v4_banco.py`, `test_v5_orientacao.py` e `test_documentos.py` passaram (24 de 24) contra o PostgreSQL do `mira-dados`.
 
-**Fontes:** documentação do `mira-dados`: [Publicação no PostgreSQL](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/pipelines/publicacao.md), [Orquestração](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/pipelines/orquestracao.md), [Modelo de dados](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/definicao/modelo_dados.md) e [Integração com o `ia`](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/arquitetura/integracao_ia.md); `orchestration/dags/mira_ciclo_dados.py`.
+**Fontes:** `src/mira_dados/publicar_postgres.py`, `alembic/`, `orchestration/dags/mira_ciclo_dados.py` e `tests/test_publicar_postgres.py`, no repositório `data`.
