@@ -30,7 +30,7 @@ flowchart TB
 | API | FastAPI (servida com Uvicorn) | Expõe os pipelines via HTTP. Ver [API HTTP](../reference/api.md). |
 | LLM | Qwen 2.5 7B local via Ollama (ADR-014) | Extração, escolha e orientação. Clientes alternativos: Anthropic e falso. |
 | Banco | PostgreSQL 17 + pgvector | Alimentos, medidas, sinônimos, grupos, trechos e produtos. Publicado pelo `mira-dados`; o `ia` só lê. Ver [Banco de dados](../reference/dados.md). |
-| Dados | DVC, Alembic, Airflow (repositório `mira-dados`) | Versionamento das fontes, ETL, Data Quality, migrações e publicação. |
+| Dados | DVC, Alembic, Airflow (repositório `mira-dados`) | Versionamento das fontes, ETL, Data Quality, migrações e publicação. Ver [Arquitetura de dados](../dados/index.md). |
 | Busca | BM25 + embeddings + RRF (manual, LangChain ou pgvector) | Recuperação de candidatos e trechos. Embeddings `granite-embedding:278m` (768 dimensões). |
 
 ## Nesta seção

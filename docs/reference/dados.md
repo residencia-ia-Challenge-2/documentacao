@@ -1,6 +1,6 @@
 # Banco de dados e fontes
 
-A base de dados do Mira é produzida e publicada pelo repositório [`data`](https://github.com/residencia-ia-Challenge-2/data) (`mira-dados`). O repositório `ia` **só lê** o schema `mira`. Esta página resume o que um desenvolvedor do `ia` precisa saber; a especificação completa está na [documentação do `mira-dados`](https://github.com/residencia-ia-Challenge-2/data/tree/main/docs).
+A base de dados do Mira é produzida e publicada pelo repositório [`data`](https://github.com/residencia-ia-Challenge-2/data) (`mira-dados`). O repositório `ia` **só lê** o schema `mira`. Esta página resume o que um desenvolvedor do `ia` precisa saber sobre o banco. Como os dados são produzidos (fontes, ETL, Data Quality, publicação) está na seção [Dados](../dados/index.md); a especificação completa está na [documentação do `mira-dados`](https://github.com/residencia-ia-Challenge-2/data/tree/main/docs).
 
 ## Regras fixas dos dados
 
@@ -14,7 +14,7 @@ A base de dados do Mira é produzida e publicada pelo repositório [`data`](http
 
 ## Conteúdo da base
 
-Números do relatório do Data Quality Gate (27 regras bloqueantes, 6 alertas), versão `0002` do schema.
+Números do relatório do Data Quality Gate (35 regras bloqueantes, 7 alertas), versão `0002` do schema.
 
 | Tabela | Linhas | Uso no pipeline | Fonte |
 | --- | ---: | --- | --- |
@@ -95,7 +95,7 @@ O `ia` confere a base pela tabela `metadados`:
 | TBCA | Alimentos fora da TACO | A verificar | Futuro |
 | USDA | Citado na P03 da v1 das Definições | — | Removido na v2 |
 
-Cada fonte tem manifesto com URL e SHA-256 e arquivo `.dvc` no Git. Licenças completas em `data/curadoria/nutricional/fontes_tabelas.csv`; histórico de admissão no [Registro de datasets](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/REGISTRO_DATASETS.md).
+Detalhes de cada fonte, licenças e protocolo de admissão em [Fontes de dados](../dados/fontes.md). Cada fonte tem manifesto com URL e SHA-256 e arquivo `.dvc` no Git. Licenças completas em `data/curadoria/nutricional/fontes_tabelas.csv`; histórico de admissão no [Registro de datasets](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/REGISTRO_DATASETS.md).
 
 ## Escopo da base: MVP e ampliada
 

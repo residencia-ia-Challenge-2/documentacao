@@ -1,6 +1,6 @@
 # Dados e DVC
 
-Mudanças em fontes, ETL, curadoria ou carga do banco são feitas no repositório [`data`](https://github.com/residencia-ia-Challenge-2/data) (`mira-dados`), não no `ia`. Este guia resume o fluxo; os comandos completos estão no [Guia rápido do `mira-dados`](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/operacao/guia_rapido.md).
+Mudanças em fontes, ETL, curadoria ou carga do banco são feitas no repositório [`data`](https://github.com/residencia-ia-Challenge-2/data) (`mira-dados`), não no `ia`. Este guia resume o fluxo; a explicação de cada camada está na seção [Dados](../dados/index.md), e os comandos completos estão no [Guia rápido do `mira-dados`](https://github.com/residencia-ia-Challenge-2/data/blob/main/docs/operacao/guia_rapido.md).
 
 !!! info "Transição"
     O `ia` ainda guarda uma cópia do ETL antigo (`src/mira/dados/`) e dos Parquets em `data/processed/`, que ele usa para conferir o `base_sha256`. A fonte da verdade é o `mira-dados`: não altere o ETL no `ia`.

@@ -102,6 +102,14 @@ nav:
       - Regras fixas e ADRs: architecture/decisoes.md
       - Visão computacional: architecture/visao-computacional.md
       - Sistema multiagentes (proposta): architecture/multiagentes.md
+  - Dados:
+      - dados/index.md
+      - Fontes de dados: dados/fontes.md
+      - Pipeline ETL: dados/etl.md
+      - Data Quality e contratos: dados/qualidade.md
+      - Curadoria e rotulação: dados/curadoria.md
+      - Publicação e orquestração: dados/publicacao.md
+      - Infraestrutura: dados/infraestrutura.md
   - Guias:
       - guides/index.md
       - Como contribuir: guides/contribuir.md
